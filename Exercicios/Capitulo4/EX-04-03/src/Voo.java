@@ -6,17 +6,20 @@ public class Voo
 	
 	public Voo (int nf, int na)
 	{
-		char as;
 		nFila = nf;
 		nAssentos = na;
 		assentos = new Assento [nf][na];
+		for (int i = 0; i < nFila; i++)
+			for (int j = 0; j < nAssentos; j++)
+				assentos[i][j] = new Assento (i+1, (char) (j + 65));
 	}
 	
 	public boolean reserva (int f, char a)
 	{
-		if (assentos[f][f].getEstado ())
+		int col = (int) (a - 65);
+		if (assentos[f-1][col].getEstado ())
 		{
-			assentos[f][f].reserva ();
+			assentos[f-1][col].reserva ();
 			return true;
 		}
 		
@@ -25,6 +28,25 @@ public class Voo
 	
 	public void imprimeMapa ()
 	{
+		int count = 0;
 		
+		System.out.print ("     ");
+		for (int i = 0; i < nAssentos; i++)
+			System.out.print ((char) (i + 65));
+			
+		System.out.println ();
+		for (Assento[] lin: assentos)
+		{
+			count ++;
+			System.out.print (String.format ("%02d", count) + " - ");
+			for (Assento col: lin)
+			{
+				if (col.getEstado ())
+					System.out.print ("L");
+				else
+					System.out.print ("X");
+			}
+			System.out.println ();
+		}
 	}
 }

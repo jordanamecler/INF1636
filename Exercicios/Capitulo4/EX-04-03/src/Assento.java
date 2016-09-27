@@ -6,16 +6,17 @@ public class Assento
 	
 	public Assento (int f, char a)
 	{
-		
+		fila = f;
+		assento = a;
 	}
 	
 	public boolean getEstado ()
 	{
-		return true;
+		return livre;
 	}
 	
 	public void reserva ()
 	{
-		
+		livre = false;
 	}
 }
