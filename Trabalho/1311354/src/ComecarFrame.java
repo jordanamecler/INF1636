@@ -21,6 +21,10 @@ public class ComecarFrame extends JFrame
 			public void actionPerformed (ActionEvent e) {
 				if (!jog1.getText ().isEmpty () && !jog2.getText ().isEmpty ())
 				{
+					Singleton.getInstance ().jogador1 = jog1.getText ();
+					Singleton.getInstance ().jogador2 = jog2.getText ();
+					PosicionarFrame posicionarFrame = new PosicionarFrame ();
+					posicionarFrame.setVisible (true);
 					dispose ();
 				}
 			}
