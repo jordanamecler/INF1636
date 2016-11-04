@@ -1,7 +1,7 @@
-public class Main
+public class Inicio
 {
 	public static void main (String[] args)
 	{
-		new ComecarFrame ();
+		new EscolherJogadores ();
 	}
 }

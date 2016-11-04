@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.geom.*;
 
-public class Panel extends JPanel
+public class Mapa extends JPanel
 {
 	private static final int TXT_X = 300;
 	private static final int TXT_Y = 300;

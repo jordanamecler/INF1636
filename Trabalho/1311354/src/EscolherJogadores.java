@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ComecarFrame extends JFrame
+public class EscolherJogadores extends JFrame
 {
 	private final int LARG_DEFAULT = 410;
 	private final int ALT_DEFAULT = 300;
 	
-	public ComecarFrame ()
+	public EscolherJogadores ()
 	{
 		setLayout (null);
 		JLabel jogador1 = new JLabel ("Jogador 1");
@@ -27,7 +27,7 @@ public class ComecarFrame extends JFrame
 					{
 						InformacoesGlobais.getInformacoesGlobais ().setJogador (1, jog1.getText ());
 						InformacoesGlobais.getInformacoesGlobais ().setJogador (2, jog2.getText ());
-						new PosicionarFrame ();
+						new PosicionarNavios (1);
 						dispose ();
 					}
 				}
