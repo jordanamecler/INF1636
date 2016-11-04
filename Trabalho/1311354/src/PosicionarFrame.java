@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 public class PosicionarFrame extends JFrame
 {
@@ -12,7 +10,7 @@ public class PosicionarFrame extends JFrame
 		setLayout (null);
 		setTitle ("Batalha Naval");
 		
-		System.out.println(Singleton.getInstance().jogador1);
+		System.out.println(InformacoesGlobais.getInformacoesGlobais().getJogador(1));
 		
 		setSize (LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
