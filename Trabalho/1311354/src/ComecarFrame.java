@@ -4,8 +4,8 @@ import java.awt.event.*;
 
 public class ComecarFrame extends JFrame
 {
-	public final int LARG_DEFAULT = 410;
-	public final int ALT_DEFAULT = 300;
+	private final int LARG_DEFAULT = 410;
+	private final int ALT_DEFAULT = 300;
 	
 	public ComecarFrame ()
 	{
@@ -21,12 +21,18 @@ public class ComecarFrame extends JFrame
 			public void actionPerformed (ActionEvent e) {
 				if (!jog1.getText ().isEmpty () && !jog2.getText ().isEmpty ())
 				{
-					InformacoesGlobais.getInformacoesGlobais ().setJogador (1, jog1.getText ());
-					InformacoesGlobais.getInformacoesGlobais ().setJogador (2, jog2.getText ());
-					PosicionarFrame posicionarFrame = new PosicionarFrame ();
-					posicionarFrame.setVisible (true);
-					dispose ();
+					if (jog1.getText ().equals (jog2.getText ()))
+						JOptionPane.showMessageDialog (null, "Os dois jogadores devem ter nomes diferentes");
+					else
+					{
+						InformacoesGlobais.getInformacoesGlobais ().setJogador (1, jog1.getText ());
+						InformacoesGlobais.getInformacoesGlobais ().setJogador (2, jog2.getText ());
+						new PosicionarFrame ();
+						dispose ();
+					}
 				}
+				else
+					JOptionPane.showMessageDialog (null, "Os dois jogadores devem ter um nome");
 			}
 		});
 		
