@@ -4,9 +4,12 @@ import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 public class PosicionarNavios extends JFrame
 {
+	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	
@@ -16,6 +19,8 @@ public class PosicionarNavios extends JFrame
 		
 		JLabel label = new JLabel ();
 		label.setText (InformacoesGlobais.getInformacoesGlobais ().getJogador (num));
+		
+		Mapa mapa = new Mapa ();
 		
 		Container c = getContentPane ();
 		
@@ -46,7 +51,20 @@ public class PosicionarNavios extends JFrame
 		
 		add (label);
 		add (terminei);
-		c.add (new Mapa ());
+		c.add (mapa);
+
+		mapa.addMouseListener (new MouseListener () {
+			public void mousePressed (MouseEvent e) {}
+			public void mouseReleased (MouseEvent e) {}
+			public void mouseEntered (MouseEvent e) {}
+			public void mouseExited (MouseEvent e) {}
+			public void mousePressed () {}
+			public void mouseClicked (MouseEvent e)
+			{
+				System.out.println ("Posicao do mouse: (" + e.getX () + "," + e.getY () + ")");
+			}
+		});
+		
 		
 		setBounds (x, y, LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);

@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class EscolherJogadores extends JFrame
 {
+	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 410;
 	private final int ALT_DEFAULT = 300;
 	

@@ -1,13 +1,10 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.geom.*;
 
 public class Mapa extends JPanel
 {
+	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private static final int TXT_X = 300;
 	private static final int TXT_Y = 300;
 	
