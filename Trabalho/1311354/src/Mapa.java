@@ -22,14 +22,22 @@ public class Mapa extends JPanel
 		// Desenha retângulo
 		double leftX = 0;
 		double topY = 0;
-		double larg = TXT_X;
-		double alt = TXT_Y;
-		Rectangle2D rt = new Rectangle2D.Double (leftX, topY, larg, alt);
-		g2d.draw (rt);
-
-		// Desenha a elipse interna ao retângulo
-		Ellipse2D e = new Ellipse2D.Double ();
-		e.setFrame (rt);
-		g2d.draw (e);
+		double larg = TXT_X/15;
+		double alt = TXT_Y/15;
+		
+		for (int i = 0; i < 15; i++)
+		{
+			leftX = 0;
+			topY = i*alt;
+			
+			for (int j = 0; j < 15; j++)
+			{
+				leftX = j*larg;
+				
+				Rectangle2D rt = new Rectangle2D.Double (leftX, topY, larg, alt);
+				g2d.draw (rt);
+			}
+			
+		}
 	}
 }
