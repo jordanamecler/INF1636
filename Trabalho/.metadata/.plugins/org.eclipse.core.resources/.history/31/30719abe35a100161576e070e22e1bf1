@@ -1,0 +1,5 @@
+public class Map
+{
+	private int numLines;
+	private int num Columns;
+}

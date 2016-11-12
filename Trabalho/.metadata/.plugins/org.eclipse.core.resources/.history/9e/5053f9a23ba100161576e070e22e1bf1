@@ -1,0 +1,18 @@
+import java.awt.*;
+
+public class Grid
+{
+	private int numLines;
+	private int numColumns;
+	
+	public Grid (int lines, int columns)
+	{
+		numLines = 15;
+		numColumns = 15;
+	}
+	
+	public void paint (Graphics g)
+	{
+		
+	}
+}

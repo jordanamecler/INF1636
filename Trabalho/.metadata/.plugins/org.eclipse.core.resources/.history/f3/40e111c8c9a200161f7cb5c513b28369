@@ -1,0 +1,14 @@
+public class InformacoesGlobais
+{
+	private static InformacoesGlobais uniqueInstance = new InformacoesGlobais ();
+	public String jogador1;
+	public String jogador2;
+	
+	private InformacoesGlobais ()
+	{
+	}
+
+	public static InformacoesGlobais getInstance () {
+		return uniqueInstance;
+	}
+}

@@ -1,0 +1,14 @@
+public class InformacoesGlobais
+{
+	private static Singleton uniqueInstance = new Singleton ();
+	public String jogador1;
+	public String jogador2;
+	
+	private InformacoesGlobais ()
+	{
+	}
+
+	public static Singleton getInstance () {
+		return uniqueInstance;
+	}
+}

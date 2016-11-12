@@ -1,0 +1,16 @@
+public class InformacoesGlobais
+{
+	private static InformacoesGlobais informacoesGlobais = null;
+	private String jogador1;
+	private String jogador2;
+	
+	private InformacoesGlobais ()
+	{
+	}
+
+	public static InformacoesGlobais getInstance () {
+		if (informacoesGlobais == null)
+			informacoesGlobais = new InformacoesGlobais ();
+		return informacoesGlobais;
+	}
+}

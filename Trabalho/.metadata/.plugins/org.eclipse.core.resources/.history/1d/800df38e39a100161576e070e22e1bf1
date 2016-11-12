@@ -1,0 +1,14 @@
+import javax.swing.*;
+
+public class Main
+{
+	public static void main (String[] args)
+	{
+		JPanel p = new JPanel ();
+		
+		Frame f = new Frame ();
+		f.getContentPane ().add (p);
+		f.setTitle ("Batalha Naval");
+		f.setVisible (true);
+	}
+}

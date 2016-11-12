@@ -1,0 +1,10 @@
+public class Main
+{
+	public static void main (String[] args)
+	{
+		Frame f = new Frame ();
+		f.getContentPane ().add (comp);
+		f.setTitle ("Batalha Naval");
+		f.setVisible (true);
+	}
+}

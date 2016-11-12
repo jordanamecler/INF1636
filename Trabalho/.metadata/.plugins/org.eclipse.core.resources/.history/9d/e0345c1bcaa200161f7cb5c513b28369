@@ -1,0 +1,19 @@
+public class InformacoesGlobais
+{
+	private static InformacoesGlobais informacoesGlobais = null;
+	private String jogador1;
+	private String jogador2;
+	
+	private InformacoesGlobais ()
+	{
+	}
+	
+	public static InformacoesGlobais getInformacoesGlobais () {
+		return informacoesGlobais;
+	}
+	
+	public void getJogador (int num)
+	{
+		
+	}
+}

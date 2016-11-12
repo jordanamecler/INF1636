@@ -1,0 +1,10 @@
+
+public class teste {
+
+	private int x = 0;
+	public teste ()
+	{
+		
+	}
+	
+}

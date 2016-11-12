@@ -1,0 +1,10 @@
+public class Map
+{
+	private int numLines;
+	private int numColumns;
+	
+	public boolean setMapSize (int lines, int columns)
+	{
+		return true;
+	}
+}

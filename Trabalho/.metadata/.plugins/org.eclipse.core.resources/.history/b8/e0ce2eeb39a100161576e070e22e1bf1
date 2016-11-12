@@ -1,0 +1,21 @@
+import java.awt.Color;
+
+import javax.swing.*;
+
+public class Main
+{
+	public static void main (String[] args)
+	{
+		JButton button = new JButton ();
+		
+		JPanel p = new JPanel ();
+		p.add (new JButton ("Botão 1"));
+		p.setBackground (Color.WHITE);
+		
+		Frame f = new Frame ();
+		f.getContentPane ().add (p);
+		f.setSize (900, 600);
+		f.setTitle ("Batalha Naval");
+		f.setVisible (true);
+	}
+}

@@ -1,0 +1,21 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class TratadorComeca implements ActionListener
+{
+	Component c;
+	
+	public TratadorComeca (Component x)
+	{
+		c = x;
+	}
+	
+	public void actionPerformed (ActionEvent e)
+	{
+		if (true)
+		{
+			
+		}
+	}
+}
