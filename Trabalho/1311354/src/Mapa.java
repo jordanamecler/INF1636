@@ -7,6 +7,7 @@ public class Mapa extends JPanel
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private static final int TXT_X = 300;
 	private static final int TXT_Y = 300;
+	private int[][] retangulos = new int[15][15];
 	
 	public void paintComponent (Graphics g)
 	{
@@ -30,11 +31,35 @@ public class Mapa extends JPanel
 			for (int j = 0; j < 15; j++)
 			{
 				leftX = j*larg;
-				
 				Rectangle2D rt = new Rectangle2D.Double (leftX, topY, larg, alt);
+				if (retangulos[j][i] == 1) {
+					g2d.setColor(Color.red);
+				}
+				else {
+					g2d.setColor(Color.white);
+				}
+				g2d.fill(rt);
+				g2d.setColor(Color.black);
 				g2d.draw (rt);
 			}
 			
 		}
+	}
+	
+	public Point getPosicaoNoMapa(Integer x, Integer y) {
+	
+		Point p = new Point();
+		
+		p.x = (int) (int) (x.doubleValue() * 15 / 300.0f);
+		p.y = (int) (int) (y.doubleValue() * 15 / 300.0f);
+		
+		return p;
+	}
+	
+	public void pintaRetanguloNaPosicao(Point p, Color c) {
+		
+		System.out.println ("Posicao no mapa: (" + p.x + "," + p.y + ")");
+		retangulos[p.x][p.y] = 1;
+		repaint();
 	}
 }

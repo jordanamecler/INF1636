@@ -25,9 +25,13 @@ public class EscolherJogadores extends JFrame
 					if (jog1.getText ().equals (jog2.getText ()))
 						JOptionPane.showMessageDialog (null, "Os dois jogadores devem ter nomes diferentes");
 					else
-					{
-						InformacoesGlobais.getInformacoesGlobais ().setJogador (1, jog1.getText ());
-						InformacoesGlobais.getInformacoesGlobais ().setJogador (2, jog2.getText ());
+					{	InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
+						Jogador j1 = inf.getJogador(1);
+						Jogador j2 = inf.getJogador(2);
+						j1.setNome(jog1.getText());
+						j2.setNome(jog2.getText());
+//						InformacoesGlobais.getInformacoesGlobais ().setJogador (1, jog1.getText ());
+//						InformacoesGlobais.getInformacoesGlobais ().setJogador (2, jog2.getText ());
 						new PosicionarNavios (1);
 						dispose ();
 					}

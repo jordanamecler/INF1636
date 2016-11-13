@@ -13,16 +13,18 @@ public class PosicionarNavios extends JFrame
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	
-	public PosicionarNavios (int num)
+	public PosicionarNavios (int numJogador)
 	{
 		setTitle ("Batalha Naval");
+		Container c = getContentPane ();
+		
+		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
+		Jogador jog = inf.getJogador(numJogador);
 		
 		JLabel label = new JLabel ();
-		label.setText (InformacoesGlobais.getInformacoesGlobais ().getJogador (num));
+		label.setText (jog.getNome());
 		
 		Mapa mapa = new Mapa ();
-		
-		Container c = getContentPane ();
 		
 		Toolkit tk = Toolkit.getDefaultToolkit ();
 		Dimension screenSize = tk.getScreenSize ();
@@ -34,7 +36,7 @@ public class PosicionarNavios extends JFrame
 		JButton terminei = new JButton ("Terminei");
 		terminei.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				if (num == 1)
+				if (numJogador == 1)
 				{
 					new PosicionarNavios (2);
 					dispose ();
@@ -49,8 +51,8 @@ public class PosicionarNavios extends JFrame
 		terminei.setSize (terminei.getPreferredSize ());
 		terminei.setHorizontalAlignment (JButton.CENTER);
 		
-		add (label);
-		add (terminei);
+		c.add (label);
+		c.add (terminei);
 		c.add (mapa);
 
 		mapa.addMouseListener (new MouseListener () {
@@ -61,7 +63,10 @@ public class PosicionarNavios extends JFrame
 			public void mousePressed () {}
 			public void mouseClicked (MouseEvent e)
 			{
-				System.out.println ("Posicao do mouse: (" + e.getX () + "," + e.getY () + ")");
+				Point p = mapa.getPosicaoNoMapa(e.getX(), e.getY());
+				jog.marcarMeuTabuleiro(p.x, p.y);
+				mapa.pintaRetanguloNaPosicao(p, Color.red);
+				System.out.println ("Posicao do mouse: (" + e.getX () + "," + e.getY () + ")");			
 			}
 		});
 		
