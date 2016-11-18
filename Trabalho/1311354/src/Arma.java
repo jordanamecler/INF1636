@@ -1,12 +1,14 @@
-public class Arma {
-
+public class Arma
+{
 	private int[][] pontos = new int[2][5];
 	private TipoDeArma tipo;
 	
-	public Arma(TipoDeArma tipo) {
+	public Arma (TipoDeArma tipo)
+	{
 		this.tipo = tipo;
 		
-		switch (tipo) {
+		switch (tipo)
+		{
 			case Couracado:
 				pontos[1][0] = 1;
 				pontos[1][1] = 1;
@@ -35,11 +37,13 @@ public class Arma {
 		}
 	}
 	
-	public TipoDeArma getTipoDeArma() {
-		return this.tipo;
+	public TipoDeArma getTipoDeArma ()
+	{
+		return tipo;
 	}
 	
-	public int[][] getPontos() {
-		return this.pontos;
+	public int[][] getPontos ()
+	{
+		return pontos;
 	}
 }

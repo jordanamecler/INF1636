@@ -1,6 +1,5 @@
-
-public enum TipoDeArma {
-
+public enum TipoDeArma
+{
 	Couracado,
 	Submarino,
 	Cruzador,

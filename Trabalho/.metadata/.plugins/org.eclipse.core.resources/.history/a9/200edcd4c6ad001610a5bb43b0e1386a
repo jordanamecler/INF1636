@@ -1,0 +1,29 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class TratadorMouse implements MouseListener
+{
+	Component c;
+	
+	public TratadorMouse (Component x)
+	{
+		c = x;
+	}
+	
+	public void mousePressed (MouseEvent e) {}
+	public void mouseReleased (MouseEvent e) {}
+	public void mouseEntered (MouseEvent e) {}
+	public void mouseExited (MouseEvent e) {}
+	public void mouseClicked (MouseEvent e)
+	{
+		if (c.getName () == "cv")
+		{
+			ArmaView a = (ArmaView) c;
+			if (a.estaDisponivel () && !a.estaEmTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
+			{
+				a.setEmTransicao ();
+				System.out.println ("cliquei na arma");
+			}
+		}
+	}
+}

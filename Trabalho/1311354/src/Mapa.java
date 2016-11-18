@@ -33,33 +33,33 @@ public class Mapa extends JPanel
 				leftX = j*larg;
 				Rectangle2D rt = new Rectangle2D.Double (leftX, topY, larg, alt);
 				if (retangulos[j][i] == 1) {
-					g2d.setColor(Color.red);
+					g2d.setColor (Color.red);
 				}
 				else {
-					g2d.setColor(Color.white);
+					g2d.setColor (Color.white);
 				}
-				g2d.fill(rt);
-				g2d.setColor(Color.black);
+				g2d.fill (rt);
+				g2d.setColor (Color.black);
 				g2d.draw (rt);
 			}
 			
 		}
 	}
 	
-	public Point getPosicaoNoMapa(Integer x, Integer y) {
-	
-		Point p = new Point();
+	public Point getPosicaoNoMapa (Integer x, Integer y)
+	{
+		Point p = new Point ();
 		
-		p.x = (int) (int) (x.doubleValue() * 15 / 300.0f);
-		p.y = (int) (int) (y.doubleValue() * 15 / 300.0f);
+		p.x = (int) (int) (x.doubleValue () * 15 / 300.0f);
+		p.y = (int) (int) (y.doubleValue () * 15 / 300.0f);
 		
 		return p;
 	}
 	
-	public void pintaRetanguloNaPosicao(Point p, Color c) {
-		
+	public void pintaRetanguloNaPosicao (Point p, Color c)
+	{	
 		System.out.println ("Posicao no mapa: (" + p.x + "," + p.y + ")");
 		retangulos[p.x][p.y] = 1;
-		repaint();
+		repaint ();
 	}
 }

@@ -1,0 +1,6 @@
+import java.awt.event.ActionListener;;
+
+public class TratadorMouse implements ActionListener
+{
+	
+}

@@ -1,15 +1,16 @@
 public class InformacoesGlobais
 {
 	private static InformacoesGlobais informacoesGlobais = null;
-	private Jogador jogador1 = new Jogador();
-	private Jogador jogador2 = new Jogador();
+	private Jogador jogador1 = new Jogador ();
+	private Jogador jogador2 = new Jogador ();
 	
 	
 	private InformacoesGlobais ()
 	{
 	}
 
-	public static InformacoesGlobais getInformacoesGlobais () {
+	public static InformacoesGlobais getInformacoesGlobais ()
+	{
 		if (informacoesGlobais == null)
 			informacoesGlobais = new InformacoesGlobais ();
 		return informacoesGlobais;
