@@ -85,13 +85,18 @@ public class PosicionarNavios extends JFrame
 					new PosicionarNavios (2);
 					dispose ();
 				}
+				else
+				{
+					new Jogo ();
+					dispose ();
+				}
 			}
 		});
 		
 		label.setBounds (410, 500, 100, 25);
 		label.setSize (label.getPreferredSize ());
 		label.setHorizontalAlignment (JLabel.CENTER);
-		terminei.setBounds (410, 530, 100, 25);
+		terminei.setBounds (390, 530, 100, 25);
 		terminei.setSize (terminei.getPreferredSize ());
 		terminei.setHorizontalAlignment (JButton.CENTER);
 		

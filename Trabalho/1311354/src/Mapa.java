@@ -5,16 +5,30 @@ import java.awt.geom.*;
 public class Mapa extends JPanel
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
-	private static final int TXT_X = 300;
-	private static final int TXT_Y = 300;
+	private final int TXT_X = 300;
+	private final int TXT_Y = 300;
+	private int distanciaX = 500;
+	private int distanciaY = 125;
 	private int[][] retangulos = new int[15][15];
+	private boolean bloqueado = false;
+	
+	public Mapa ()
+	{
+		
+	}
+	
+	public Mapa (int x, int y)
+	{
+		distanciaX = x;
+		distanciaY = y;
+	}
 	
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent (g);
 		Graphics2D g2d = (Graphics2D) g;
 		
-		setBounds (500, 125, TXT_X, TXT_Y);
+		setBounds (distanciaX, distanciaY, TXT_X, TXT_Y);
 		setBackground (Color.white);
 		
 		// Desenha retângulo
@@ -32,7 +46,10 @@ public class Mapa extends JPanel
 			{
 				leftX = j*larg;
 				Rectangle2D rt = new Rectangle2D.Double (leftX, topY, larg, alt);
-				if (retangulos[j][i] == 1) {
+				
+				if (bloqueado)
+					g2d.setColor (new Color (177, 203, 255));
+				else if (retangulos[j][i] == 1) {
 					g2d.setColor (Color.red);
 				}
 				else {
@@ -42,8 +59,13 @@ public class Mapa extends JPanel
 				g2d.setColor (Color.black);
 				g2d.draw (rt);
 			}
-			
 		}
+	}
+	
+	public void setBloqueado (boolean bloq)
+	{
+		bloqueado = bloq;
+		repaint ();
 	}
 	
 	public Point getPosicaoNoMapa (Integer x, Integer y)
