@@ -1,0 +1,4 @@
+public class ObservadorIF
+{
+	public void update (Object obj);
+}
