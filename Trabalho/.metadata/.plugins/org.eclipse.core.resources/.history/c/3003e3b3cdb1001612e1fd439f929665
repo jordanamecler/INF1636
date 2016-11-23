@@ -44,14 +44,6 @@ public class Jogador implements ObservadoIF
 		this.tabuleiroInimigo[x][y] = 1;
 	}
 	
-	public void atualizaArmasPosicionadas ()
-	{
-		for (boolean b: armasPosicionadas)
-			if (!b)
-				return;
-		this.notifyObservers ();
-	}
-	
 	@Override
     public void registerObserver (ObservadorIF observer)
 	{
@@ -67,11 +59,11 @@ public class Jogador implements ObservadoIF
     @Override
     public void notifyObservers ()
     {
-    	// Chama o método de atualização de todos os observers disponíveis
+    	// Chama o método de atualização de todos os observers disponíveis.
         for (ObservadorIF ob : observers)
         {
         	System.out.println ("Notificando observers!");
-        	ob.update (true);
+        	ob.update (this.peso);
          }
     }
 }

@@ -54,9 +54,9 @@ public class Mapa extends JPanel
 //				else if (retangulos[j][i] == 1) {
 //					g2d.setColor (Color.red);
 //				}
-				else {
-					g2d.setColor (Color.white);
-				}
+//				else {
+//					g2d.setColor (Color.white);
+//				}
 				g2d.fill (rt);
 				g2d.setColor (Color.black);
 				g2d.draw (rt);

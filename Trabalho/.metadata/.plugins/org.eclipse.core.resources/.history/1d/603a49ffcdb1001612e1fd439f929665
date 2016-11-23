@@ -48,8 +48,7 @@ public class Jogador implements ObservadoIF
 	{
 		for (boolean b: armasPosicionadas)
 			if (!b)
-				return;
-		this.notifyObservers ();
+				this.notifyObservers ();
 	}
 	
 	@Override
@@ -71,7 +70,7 @@ public class Jogador implements ObservadoIF
         for (ObservadorIF ob : observers)
         {
         	System.out.println ("Notificando observers!");
-        	ob.update (true);
+        	ob.update (this.peso);
          }
     }
 }

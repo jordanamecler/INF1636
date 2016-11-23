@@ -12,7 +12,7 @@ public class Jogador implements ObservadoIF
 	private int[][] meuTabuleiro = new int[15][15];
 	private int[][] tabuleiroInimigo = new int[15][15];
 	private boolean[] armasPosicionadas = new boolean[15];
-	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
+	private List observers = new ArrayList ();
 	
 	public String getNome ()
 	{
@@ -44,34 +44,22 @@ public class Jogador implements ObservadoIF
 		this.tabuleiroInimigo[x][y] = 1;
 	}
 	
-	public void atualizaArmasPosicionadas ()
-	{
-		for (boolean b: armasPosicionadas)
-			if (!b)
-				return;
-		this.notifyObservers ();
-	}
-	
 	@Override
-    public void registerObserver (ObservadorIF observer)
-	{
+    public void registerObserver (ObservadorIF observer) {
          observers.add (observer);
     }
 
     @Override
-    public void removeObserver (ObservadorIF observer)
-    {
-         observers.remove (observer);
+    public void removeObserver (ObservadorIF observer) {
+         observers.remove(observer);
     }
 
     @Override
-    public void notifyObservers ()
-    {
-    	// Chama o método de atualização de todos os observers disponíveis
-        for (ObservadorIF ob : observers)
-        {
-        	System.out.println ("Notificando observers!");
-        	ob.update (true);
+    public void notifyObservers() {
+     // Chama o método de atualização de todos os observers disponíveis.
+         for (Observer ob : observers) {
+         System.out.println("Notificando observers!");
+           ob.update(this.peso);
          }
     }
 }
