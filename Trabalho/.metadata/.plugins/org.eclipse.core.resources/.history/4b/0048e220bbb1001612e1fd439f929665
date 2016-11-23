@@ -3,8 +3,6 @@ import java.awt.event.*;
 
 import Model.InformacoesGlobais;
 import Model.Jogador;
-import View.ArmaView;
-import View.Mapa;
 
 public class TratadorMouse implements MouseListener
 {

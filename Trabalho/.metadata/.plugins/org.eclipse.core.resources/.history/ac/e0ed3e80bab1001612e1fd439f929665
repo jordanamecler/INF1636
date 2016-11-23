@@ -1,8 +1,4 @@
 import javax.swing.*;
-
-import Model.InformacoesGlobais;
-import Model.Jogador;
-
 import java.awt.*;
 import java.awt.event.*;
 
