@@ -25,9 +25,14 @@ public class TratadorMouse implements MouseListener
 	{
 		if (c.getName () == "cv" || c.getName ().contains ("sv"))
 		{
-			ArmaView a = (ArmaView) c;
-			if (a.estaDisponivel () && !a.estaEmTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
-				a.setEmTransicao ();
+//			ArmaView a = (ArmaView) c;
+//			if (a.estaDisponivel () && !a.estaEmTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
+//			{	
+//				a.setEmTransicao ();
+//				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
+//				Jogador j1 = inf.getJogador(1);
+//				j1.atualizaArmasPosicionadas (0, true);
+//			}
 		}
 		else if (c.getName ().contains ("mapa"))
 		{

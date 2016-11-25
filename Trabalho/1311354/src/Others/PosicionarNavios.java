@@ -12,8 +12,6 @@ import View.Mapa;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PosicionarNavios extends JFrame implements ObservadorIF
 {
@@ -21,11 +19,14 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	private JButton terminei;
+	private int jog;
 
 	public PosicionarNavios (int numJogador)
 	{
 		setTitle ("Batalha Naval");
 		Container c = getContentPane ();
+		
+		jog = numJogador;
 		
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog = inf.getJogador (numJogador);
@@ -88,7 +89,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		mapa.addMouseListener (new TratadorMouse (mapa));
 		
 		terminei = new JButton ("Terminei");
-		terminei.setEnabled (false);
+		//terminei.setEnabled (false);
 		terminei.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				if (numJogador == 1)
@@ -125,6 +126,8 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		setBounds (x, y, LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		
+		InformacoesGlobais.getInformacoesGlobais ().getJogador (numJogador).registerObserver (this);
+		
 		setVisible (true);
 	}
 	
@@ -134,6 +137,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		if (((boolean) obj))
 		{
 			terminei.setEnabled (true);
+			InformacoesGlobais.getInformacoesGlobais ().getJogador (jog).removeObserver (this);
 		}
 	}
 }

@@ -44,8 +44,9 @@ public class Jogador implements ObservadoIF
 		this.tabuleiroInimigo[x][y] = 1;
 	}
 	
-	public void atualizaArmasPosicionadas ()
+	public void atualizaArmasPosicionadas (int pos, boolean estado)
 	{
+		armasPosicionadas[pos] = estado;
 		for (boolean b: armasPosicionadas)
 			if (!b)
 				return;
@@ -68,7 +69,7 @@ public class Jogador implements ObservadoIF
     public void notifyObservers ()
     {
     	// Chama o método de atualização de todos os observers disponíveis
-        for (ObservadorIF ob : observers)
+    	for (ObservadorIF ob : observers)
         {
         	System.out.println ("Notificando observers!");
         	ob.update (true);
