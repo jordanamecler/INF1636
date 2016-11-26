@@ -1,4 +1,4 @@
-package Others;
+package Controller;
 
 import javax.swing.*;
 
@@ -6,6 +6,8 @@ import Model.Arma;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.TipoDeArma;
+import Others.ObservadorIF;
+import Others.TratadorMouse;
 import View.ArmaView;
 import View.Mapa;
 

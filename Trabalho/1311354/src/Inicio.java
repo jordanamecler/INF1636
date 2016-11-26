@@ -1,4 +1,4 @@
-import Others.EscolherJogadores;
+import Controller.EscolherJogadores;
 
 public class Inicio
 {
