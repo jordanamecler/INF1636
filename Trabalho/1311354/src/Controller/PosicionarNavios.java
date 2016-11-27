@@ -21,7 +21,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	private JButton terminei;
-	private int jog;
+	public int jog;
 
 	public PosicionarNavios (int numJogador)
 	{
@@ -40,16 +40,22 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		Mapa mapa = new Mapa ();
 	
 		// Armas
+		
+		// 1x couracado
 		Arma couracado = new Arma (TipoDeArma.Couracado);
+		jog.armas.add(couracado);
+		
 		ArmaView cv = new ArmaView (couracado);
 		cv.setBounds (50, 100, 15 * 5, 15 * 2);
-		c.add (cv);
 		cv.setName ("cv");
 		cv.addMouseListener (new TratadorMouse (cv));
+		c.add (cv);
 		
-		Arma submarino = new Arma (TipoDeArma.Submarino);
+		// 4x submarinos
 		for (int i = 0; i < 4; i++)
 		{
+			Arma submarino = new Arma (TipoDeArma.Submarino);
+			jog.armas.add(submarino);
 			ArmaView sv = new ArmaView (submarino);
 			sv.setBounds (50 + i * 25  ,180 , 15 , 15 * 2);
 			c.add (sv);
@@ -57,9 +63,11 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			sv.addMouseListener (new TratadorMouse (sv));
 		}
 		
-		Arma cruzador = new Arma (TipoDeArma.Cruzador);
+		// 2x cruzadores
 		for (int i = 0; i < 2; i++)
 		{
+			Arma cruzador = new Arma (TipoDeArma.Cruzador);
+			jog.armas.add(cruzador);
 			ArmaView crv = new ArmaView (cruzador);
 			crv.setBounds (50 + i * 25 * 4,260, 15 * 4, 15 * 2);
 			c.add (crv);
@@ -67,9 +75,11 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			crv.addMouseListener (new TratadorMouse (crv));
 		}
 		
-		Arma hidro = new Arma (TipoDeArma.Hidroaviao);
+		// 5x hidroavioes
 		for (int i = 0; i < 5; i++)
 		{
+			Arma hidro = new Arma (TipoDeArma.Hidroaviao);
+			jog.armas.add(hidro);
 			ArmaView hv = new ArmaView (hidro);
 			hv.setBounds (50 + i * 25 * 3,340, 15 * 3, 15 * 2);
 			c.add (hv);
@@ -77,9 +87,11 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			hv.addMouseListener (new TratadorMouse (hv));
 		}
 		
-		Arma des = new Arma (TipoDeArma.Destroyer);
+		// 3x destroyers
 		for (int i = 0; i < 3; i++)
 		{
+			Arma des = new Arma (TipoDeArma.Destroyer);
+			jog.armas.add(des);
 			ArmaView dv = new ArmaView (des);
 			dv.setBounds (50 + i * 25 * 2,420, 15 * 2, 15 * 2);
 			c.add (dv);

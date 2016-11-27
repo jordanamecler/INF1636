@@ -3,6 +3,9 @@ package Others;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.SwingUtilities;
+
+import Controller.PosicionarNavios;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import View.ArmaView;
@@ -21,18 +24,31 @@ public class TratadorMouse implements MouseListener
 	public void mouseReleased (MouseEvent e) {}
 	public void mouseEntered (MouseEvent e) {}
 	public void mouseExited (MouseEvent e) {}
+	
 	public void mouseClicked (MouseEvent e)
 	{
-		if (c.getName () == "cv" || c.getName ().contains ("sv"))
+		// escolheu alguma arma
+		if (c.getName () == "cv" || c.getName ().contains ("sv") || c.getName ().contains ("dv") || c.getName ().contains ("crv") || c.getName ().contains ("hv"))
 		{
-//			ArmaView a = (ArmaView) c;
-//			if (a.estaDisponivel () && !a.estaEmTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
-//			{	
-//				a.setEmTransicao ();
-//				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
-//				Jogador j1 = inf.getJogador(1);
-//				j1.atualizaArmasPosicionadas (0, true);
-//			}
+			System.out.println(c.getName());
+			ArmaView a = (ArmaView) c;
+			PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot(c);
+			int jog = frame.jog;
+			System.out.println(jog);
+			if (a.estaDisponivel () && !a.estaEmTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
+			{	
+				a.setEmTransicao (true);
+				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
+				Jogador j = inf.getJogador(jog);
+				j.atualizaArmasPosicionadas (0, true);
+			}
+			else if (a.estaEmTransicao()) 
+			{
+				a.setEmTransicao(false);
+				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
+				Jogador j1 = inf.getJogador(1);
+				j1.atualizaArmasPosicionadas (0, false);
+			}
 		}
 		else if (c.getName ().contains ("mapa"))
 		{

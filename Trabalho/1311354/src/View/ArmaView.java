@@ -116,15 +116,15 @@ public class ArmaView extends JPanel
 		}
 	}
 	
-	public void setEmTransicao ()
+	public void setEmTransicao (Boolean b)
 	{
-		emTransicao = true;
+		emTransicao = b;
 		repaint ();
 	}
 	
-	public void setDisponivel ()
+	public void setDisponivel (Boolean b)
 	{
-		disponivel = true;
+		disponivel = b;
 		repaint ();
 	}
 	

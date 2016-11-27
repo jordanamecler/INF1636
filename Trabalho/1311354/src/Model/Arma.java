@@ -1,9 +1,14 @@
 package Model;
 
+import java.awt.Point;
+
 public class Arma
 {
-	private int[][] pontos = new int[2][5];
+	private int[][] pontos = new int[2][5]; // 0 = vazio, 1 = preenche
+	private int[][] estado = new int[2][5]; // 0 = vazio, 1 = ok, 2 = destruido
 	private TipoDeArma tipo;
+	private Point posicao;
+	private Boolean usada;
 	
 	public Arma (TipoDeArma tipo)
 	{
@@ -37,6 +42,12 @@ public class Arma
 				pontos[1][1] = 1;
 				break;
 		}
+		
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 2; j++) {
+				estado[j][i] = pontos[j][i];
+			}
+		}
 	}
 	
 	public TipoDeArma getTipoDeArma ()
@@ -47,5 +58,31 @@ public class Arma
 	public int[][] getPontos ()
 	{
 		return pontos;
+	}
+	
+	public int[][] getEstado ()
+	{
+		return estado;
+	}
+	
+	public void setEstadoDestruido (int x, int y)
+	{
+		estado[x][y] = 2;
+	}
+
+	public Point getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Point posicao) {
+		this.posicao = posicao;
+	}
+
+	public Boolean getUsada() {
+		return usada;
+	}
+
+	public void setUsada(Boolean usada) {
+		this.usada = usada;
 	}
 }

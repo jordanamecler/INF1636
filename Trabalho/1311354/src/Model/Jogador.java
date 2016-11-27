@@ -14,6 +14,8 @@ public class Jogador implements ObservadoIF
 	private boolean[] armasPosicionadas = new boolean[15];
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	
+	public List armas = new ArrayList <Arma> ();
+	
 	public String getNome ()
 	{
 		return nome;
