@@ -46,8 +46,9 @@ public class Jogador implements ObservadoIF
 		this.tabuleiroInimigo[x][y] = 1;
 	}
 	
-	public Boolean posicionarArmaNoTabuleiro(int x, int y, Arma a) {
-		int[][] pontosDaArma = a.getPontos();
+	public Boolean posicionarArmaNoTabuleiro (int x, int y, Arma a)
+	{
+		int[][] pontosDaArma = a.getPontos ();
 		int[][] tabuleiroAux = new int[15][15];
 		// TODO: fazer os testes de limites do mapa e de proximidade com outras armas e retornar se posicionou
 		
@@ -55,15 +56,40 @@ public class Jogador implements ObservadoIF
 			  for (int j=0; j< meuTabuleiro[i].length; j++)
 				  tabuleiroAux[i][j] = meuTabuleiro[i][j];
 		
-		for (int i = 0; i < 5; i++ ) {
-			for (int j = 1; j >= 0; j-- ) {
-				if (pontosDaArma[j][i] == 1){
-					if (tabuleiroAux[x + i][y + j - 1] != 0 || tabuleiroAux[x + i + 1][y + j - 1] != 0 ||
-						tabuleiroAux[x + i][y + j] != 0)
+		if (x + a.getLargura () - 1 > 14)
+			return false;
+		if (y - a.getAltura () < -1)
+			return false;
+		
+		for (int i = 0; i < 5; i++ )
+		{
+			for (int j = 1; j >= 0; j-- )
+			{
+				if (pontosDaArma[j][i] == 1)
+				{
+					switch (a.getTipoDeArma ())
 					{
-						return false;
+						case Vazio:
+							break;
+						case Couracado:
+							if (tabuleiroAux[x + i][y + j - 1] != 0 || tabuleiroAux[x + i + 1][y + j - 1] != 0 ||
+								tabuleiroAux[x + i][y + j] != 0)
+							{
+								return false;
+							}
+							break;
+						case Submarino:
+							break;
+						case Cruzador:
+							break;
+						case Hidroaviao:
+							break;
+						case Destroyer:
+							break;
+						case Destruida:
+							break;
 					}
-					tabuleiroAux[x + i][y + j - 1] = pontosDaArma[j][i];
+					tabuleiroAux[x + i][y + j - 1] = a.getTipoDeArma ().ordinal ();
 				}
 			}
 		}
@@ -80,9 +106,12 @@ public class Jogador implements ObservadoIF
 		this.notifyObservers ();
 	}
 	
-	public Arma getArmaSelecionada() {
-		for (Arma a: armas) {
-			if (a.getSelecionada() == true) return a;
+	public Arma getArmaSelecionada()
+	{
+		for (Arma a: armas)
+		{
+			if (a.getSelecionada () == true)
+				return a;
 		}
 		return null;
 	}

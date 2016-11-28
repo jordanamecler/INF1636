@@ -31,24 +31,31 @@ public class TratadorMouse implements MouseListener
 		// escolheu alguma arma
 		if (c.getName () == "cv" || c.getName ().contains ("sv") || c.getName ().contains ("dv") || c.getName ().contains ("crv") || c.getName ().contains ("hv"))
 		{
-			System.out.println(c.getName());
+			System.out.println (c.getName ());
 			ArmaView a = (ArmaView) c;
-			PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot(c);
+			PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot (c);
 			int jog = frame.jog;
-			System.out.println(jog);
-			if (a.estaDisponivel () && !a.estaEmTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
-			{	
-				a.setEmTransicao (true);
-				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
-				Jogador j = inf.getJogador(jog);
-				j.atualizaArmasPosicionadas (0, true);
-			}
-			else if (a.estaEmTransicao()) 
+			System.out.println (jog);
+			
+			if (a.getArma ().getDisponivel () && !a.getArma ().getTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
 			{
-				a.setEmTransicao(false);
-				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais();
-				Jogador j1 = inf.getJogador(1);
-				j1.atualizaArmasPosicionadas (0, false);
+				a.getArma ().setEmTransicao (true);
+				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
+				Jogador j = inf.getJogador (jog);
+				if (c.getName () == "cv")
+					j.atualizaArmasPosicionadas (0, true);
+				else
+					j.atualizaArmasPosicionadas (Integer.parseInt (c.getName ().replaceAll("[^0-9]", "")), true);
+			}
+			else if (a.getArma ().getTransicao ()) 
+			{
+				a.getArma ().setEmTransicao (false);
+				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
+				Jogador j1 = inf.getJogador (1);
+				if (c.getName () == "cv")
+					j1.atualizaArmasPosicionadas (0, false);
+				else
+					j1.atualizaArmasPosicionadas (Integer.parseInt (c.getName ().replaceAll("[^0-9]", "")), false);
 			}
 		}
 		else if (c.getName ().contains ("mapa"))
@@ -61,16 +68,18 @@ public class TratadorMouse implements MouseListener
 			else
 				jog = inf.getJogador (2);
 			
-			Arma armaSelecionada = jog.getArmaSelecionada();
-			if (armaSelecionada != null) {
-				Mapa m = (Mapa) c;
-				Point p = m.getPosicaoNoMapa(e.getX(), e.getY());
-				Boolean conseguiuPosicionar = jog.posicionarArmaNoTabuleiro(p.x, p.y, armaSelecionada);
-				m.marcaMapa(jog.getMeuTabuleiro());
-				System.out.println("Conseguiu posicionar arma:");
-				System.out.println(conseguiuPosicionar);
-			}
+			Arma armaSelecionada = jog.getArmaSelecionada ();
 			
+			if (armaSelecionada != null)
+			{
+				Mapa m = (Mapa) c;
+				Point p = m.getPosicaoNoMapa (e.getX (), e.getY ());
+				Boolean conseguiuPosicionar = jog.posicionarArmaNoTabuleiro (p.x, p.y, armaSelecionada);
+				m.marcaMapa (jog.getMeuTabuleiro ());
+				System.out.println ("Conseguiu posicionar arma: " + conseguiuPosicionar);
+				if (conseguiuPosicionar)
+					armaSelecionada.setEmTransicao (false);
+			}
 			
 //			jog.marcarMeuTabuleiro(p.x, p.y);
 //			m.pintaRetanguloNaPosicao(p, Color.red);

@@ -10,12 +10,11 @@ public class ArmaView extends JPanel
 {	
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private Arma arma;
-	private boolean disponivel = true;
-	private boolean emTransicao = false;
+	
 	
 	public ArmaView (Arma a)
 	{
-		this.arma = a;
+		arma = a;
 	}
 	
 	public void paintComponent (Graphics g)
@@ -32,10 +31,12 @@ public class ArmaView extends JPanel
 		int[][] pontos = arma.getPontos ();
 		Color color = Color.white;
 		
-		if (disponivel && !emTransicao)
+		if (arma.getDisponivel () && !arma.getTransicao ())
 		{
 			switch (arma.getTipoDeArma ())
 			{
+				case Vazio:
+					break;
 				case Couracado:
 					color = Color.orange;
 					break;
@@ -51,12 +52,16 @@ public class ArmaView extends JPanel
 				case Destroyer:
 					color = Color.black;
 					break;
+				case Destruida:
+					break;
 			}
 		}
-		else if (emTransicao)
+		else if (arma.getTransicao ())
 		{
 			switch (arma.getTipoDeArma ())
 			{
+				case Vazio:
+					break;
 				case Couracado:
 					color = new Color (255, 221, 181);
 					break;
@@ -72,12 +77,16 @@ public class ArmaView extends JPanel
 				case Destroyer:
 					color = Color.black;
 					break;
+				case Destruida:
+					break;
 			}
 		}
 		else
 		{
 			switch (arma.getTipoDeArma ())
 			{
+				case Vazio:
+					break;
 				case Couracado:
 					color = Color.orange;
 					break;
@@ -92,6 +101,8 @@ public class ArmaView extends JPanel
 					break;
 				case Destroyer:
 					color = Color.black;
+					break;
+				case Destruida:
 					break;
 			}
 		}
@@ -116,34 +127,9 @@ public class ArmaView extends JPanel
 		}
 	}
 	
-	public void setEmTransicao (Boolean b)
+	public Arma getArma ()
 	{
-		emTransicao = b;
-		this.arma.setSelecionada(b);
-		repaint ();
-	}
-	
-	public void setDisponivel (Boolean b)
-	{
-		disponivel = b;
-		repaint ();
-	}
-	
-	public void setIndisponivel ()
-	{
-		disponivel = false;
-		emTransicao = false;
-		repaint ();
-	}
-	
-	public boolean estaDisponivel ()
-	{
-		return disponivel;
-	}
-	
-	public boolean estaEmTransicao ()
-	{
-		return emTransicao;
+		return arma;
 	}
 	
 	public boolean clicouNaArma (Integer x, Integer y)
