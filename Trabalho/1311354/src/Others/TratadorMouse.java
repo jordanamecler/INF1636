@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.SwingUtilities;
 
 import Controller.PosicionarNavios;
+import Model.Arma;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import View.ArmaView;
@@ -60,11 +61,20 @@ public class TratadorMouse implements MouseListener
 			else
 				jog = inf.getJogador (2);
 			
-			Mapa m = (Mapa) c;
-			Point p = m.getPosicaoNoMapa(e.getX(), e.getY());
-			jog.marcarMeuTabuleiro(p.x, p.y);
-			m.pintaRetanguloNaPosicao(p, Color.red);
-			System.out.println ("Posicao do mouse: (" + e.getX () + "," + e.getY () + ")");
+			Arma armaSelecionada = jog.getArmaSelecionada();
+			if (armaSelecionada != null) {
+				Mapa m = (Mapa) c;
+				Point p = m.getPosicaoNoMapa(e.getX(), e.getY());
+				Boolean conseguiuPosicionar = jog.posicionarArmaNoTabuleiro(p.x, p.y, armaSelecionada);
+				m.marcaMapa(jog.getMeuTabuleiro());
+				System.out.println("Conseguiu posicionar arma:");
+				System.out.println(conseguiuPosicionar);
+			}
+			
+			
+//			jog.marcarMeuTabuleiro(p.x, p.y);
+//			m.pintaRetanguloNaPosicao(p, Color.red);
+//			System.out.println ("Posicao do mouse: (" + e.getX () + "," + e.getY () + ")");
 		}
 	}
 }

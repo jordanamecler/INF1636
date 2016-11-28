@@ -119,6 +119,7 @@ public class ArmaView extends JPanel
 	public void setEmTransicao (Boolean b)
 	{
 		emTransicao = b;
+		this.arma.setSelecionada(b);
 		repaint ();
 	}
 	

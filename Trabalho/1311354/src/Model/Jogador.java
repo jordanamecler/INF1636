@@ -14,7 +14,7 @@ public class Jogador implements ObservadoIF
 	private boolean[] armasPosicionadas = new boolean[15];
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	
-	public List armas = new ArrayList <Arma> ();
+	public List<Arma> armas = new ArrayList <Arma> ();
 	
 	public String getNome ()
 	{
@@ -46,6 +46,20 @@ public class Jogador implements ObservadoIF
 		this.tabuleiroInimigo[x][y] = 1;
 	}
 	
+	public Boolean posicionarArmaNoTabuleiro(int x, int y, Arma a) {
+		int[][] pontosDaArma = a.getPontos();
+		// TODO: fazer os testes de limites do mapa e de proximidade com outras armas e retornar se posicionou
+	
+		for (int i = 0; i < 5; i++ ) {
+			for (int j = 1; j >= 0; j-- ) {
+				if (pontosDaArma[j][i] == 1){
+					this.meuTabuleiro[x + i][y + j - 1] = pontosDaArma[j][i];
+				}
+			}
+		}
+		return true;
+	}
+	
 	public void atualizaArmasPosicionadas (int pos, boolean estado)
 	{
 		armasPosicionadas[pos] = estado;
@@ -53,6 +67,13 @@ public class Jogador implements ObservadoIF
 			if (!b)
 				return;
 		this.notifyObservers ();
+	}
+	
+	public Arma getArmaSelecionada() {
+		for (Arma a: armas) {
+			if (a.getSelecionada() == true) return a;
+		}
+		return null;
 	}
 	
 	@Override

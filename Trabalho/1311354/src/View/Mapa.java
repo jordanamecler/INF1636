@@ -51,11 +51,13 @@ public class Mapa extends JPanel
 				
 				if (bloqueado)
 					g2d.setColor (new Color (177, 203, 255));
-//				else if (retangulos[j][i] == 1) {
-//					g2d.setColor (Color.red);
-//				}
 				else {
-					g2d.setColor (Color.white);
+					if (retangulos[j][i] == 1) {
+						g2d.setColor (Color.red);
+					}
+					else {
+						g2d.setColor (Color.white);
+					}
 				}
 				g2d.fill (rt);
 				g2d.setColor (Color.black);
@@ -85,5 +87,14 @@ public class Mapa extends JPanel
 		System.out.println ("Posicao no mapa: (" + p.x + "," + p.y + ")");
 		retangulos[p.x][p.y] = 1;
 		repaint ();
+	}
+	
+	public void marcaMapa(int[][] mapa) {
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				this.retangulos[j][i] = mapa[j][i];
+			}
+		}
+		repaint();
 	}
 }

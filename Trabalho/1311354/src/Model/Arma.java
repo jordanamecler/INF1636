@@ -8,7 +8,7 @@ public class Arma
 	private int[][] estado = new int[2][5]; // 0 = vazio, 1 = ok, 2 = destruido
 	private TipoDeArma tipo;
 	private Point posicao;
-	private Boolean usada;
+	private Boolean selecionada = false;
 	
 	public Arma (TipoDeArma tipo)
 	{
@@ -78,11 +78,11 @@ public class Arma
 		this.posicao = posicao;
 	}
 
-	public Boolean getUsada() {
-		return usada;
+	public Boolean getSelecionada() {
+		return selecionada;
 	}
 
-	public void setUsada(Boolean usada) {
-		this.usada = usada;
+	public void setSelecionada(Boolean selecionada) {
+		this.selecionada = selecionada;
 	}
 }
