@@ -48,15 +48,26 @@ public class Jogador implements ObservadoIF
 	
 	public Boolean posicionarArmaNoTabuleiro(int x, int y, Arma a) {
 		int[][] pontosDaArma = a.getPontos();
+		int[][] tabuleiroAux = new int[15][15];
 		// TODO: fazer os testes de limites do mapa e de proximidade com outras armas e retornar se posicionou
-	
+		
+		for(int i=0; i< meuTabuleiro.length; i++)
+			  for (int j=0; j< meuTabuleiro[i].length; j++)
+				  tabuleiroAux[i][j] = meuTabuleiro[i][j];
+		
 		for (int i = 0; i < 5; i++ ) {
 			for (int j = 1; j >= 0; j-- ) {
 				if (pontosDaArma[j][i] == 1){
-					this.meuTabuleiro[x + i][y + j - 1] = pontosDaArma[j][i];
+					if (tabuleiroAux[x + i][y + j - 1] != 0 || tabuleiroAux[x + i + 1][y + j - 1] != 0 ||
+						tabuleiroAux[x + i][y + j] != 0)
+					{
+						return false;
+					}
+					tabuleiroAux[x + i][y + j - 1] = pontosDaArma[j][i];
 				}
 			}
 		}
+		meuTabuleiro = tabuleiroAux;
 		return true;
 	}
 	
