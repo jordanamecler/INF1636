@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 import Model.Arma;
+import Model.CoresMapa;
 
 public class ArmaView extends JPanel
 {	
@@ -35,24 +36,22 @@ public class ArmaView extends JPanel
 		{
 			switch (arma.getTipoDeArma ())
 			{
-				case Vazio:
-					break;
 				case Couracado:
-					color = Color.orange;
+					color = CoresMapa.Couracado.getColor ();
 					break;
 				case Submarino:
-					color = Color.blue;
+					color = CoresMapa.Submarino.getColor ();
 					break;
 				case Cruzador:
-					color = Color.green;
+					color = CoresMapa.Cruzador.getColor ();
 					break;
 				case Hidroaviao:
-					color = Color.CYAN;
+					color = CoresMapa.Hidroaviao.getColor ();
 					break;
 				case Destroyer:
-					color = Color.black;
+					color = CoresMapa.Destroyer.getColor ();
 					break;
-				case Destruida:
+				default:
 					break;
 			}
 		}
@@ -60,24 +59,22 @@ public class ArmaView extends JPanel
 		{
 			switch (arma.getTipoDeArma ())
 			{
-				case Vazio:
-					break;
 				case Couracado:
-					color = new Color (255, 221, 181);
+					color = CoresMapa.CouracadoSelecionado.getColor ();
 					break;
 				case Submarino:
-					color = Color.blue;
+					color = CoresMapa.SubmarinoSelecionado.getColor ();
 					break;
 				case Cruzador:
-					color = Color.green;
+					color = CoresMapa.CruzadorSelecionado.getColor ();
 					break;
 				case Hidroaviao:
-					color = Color.CYAN;
+					color = CoresMapa.HidroaviaoSelecionado.getColor ();
 					break;
 				case Destroyer:
-					color = Color.black;
+					color = CoresMapa.DestroyerSelecionado.getColor ();
 					break;
-				case Destruida:
+				default:
 					break;
 			}
 		}

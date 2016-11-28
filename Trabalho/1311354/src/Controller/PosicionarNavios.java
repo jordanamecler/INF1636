@@ -14,6 +14,8 @@ import View.Mapa;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PosicionarNavios extends JFrame implements ObservadorIF
 {
@@ -21,8 +23,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	private JButton terminei;
-	public int jog;
-
+	private int jog;
+	private List <ArmaView> armasViews = new ArrayList <ArmaView> ();
+	
 	public PosicionarNavios (int numJogador)
 	{
 		setTitle ("Batalha Naval");
@@ -43,9 +46,10 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		
 		// 1x couracado
 		Arma couracado = new Arma (TipoDeArma.Couracado);
-		jog.armas.add(couracado);
+		jog.getListaArmas ().add(couracado);
 		
 		ArmaView cv = new ArmaView (couracado);
+		armasViews.add (cv);
 		cv.setBounds (50, 100, 15 * 5, 15 * 2);
 		cv.setName ("cv");
 		cv.addMouseListener (new TratadorMouse (cv));
@@ -55,8 +59,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		for (int i = 0; i < 4; i++)
 		{
 			Arma submarino = new Arma (TipoDeArma.Submarino);
-			jog.armas.add(submarino);
+			jog.getListaArmas ().add (submarino);
 			ArmaView sv = new ArmaView (submarino);
+			armasViews.add (sv);
 			sv.setBounds (50 + i * 25  ,180 , 15 , 15 * 2);
 			c.add (sv);
 			sv.setName ("sv" + (i+1));
@@ -67,8 +72,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		for (int i = 0; i < 2; i++)
 		{
 			Arma cruzador = new Arma (TipoDeArma.Cruzador);
-			jog.armas.add(cruzador);
+			jog.getListaArmas ().add (cruzador);
 			ArmaView crv = new ArmaView (cruzador);
+			armasViews.add (crv);
 			crv.setBounds (50 + i * 25 * 4,260, 15 * 4, 15 * 2);
 			c.add (crv);
 			crv.setName ("crv" + (i+1));
@@ -79,8 +85,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		for (int i = 0; i < 5; i++)
 		{
 			Arma hidro = new Arma (TipoDeArma.Hidroaviao);
-			jog.armas.add(hidro);
+			jog.getListaArmas ().add (hidro);
 			ArmaView hv = new ArmaView (hidro);
+			armasViews.add (hv);
 			hv.setBounds (50 + i * 25 * 3,340, 15 * 3, 15 * 2);
 			c.add (hv);
 			hv.setName ("hv" + (i+1));
@@ -91,8 +98,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		for (int i = 0; i < 3; i++)
 		{
 			Arma des = new Arma (TipoDeArma.Destroyer);
-			jog.armas.add(des);
+			jog.getListaArmas ().add (des);
 			ArmaView dv = new ArmaView (des);
+			armasViews.add (dv);
 			dv.setBounds (50 + i * 25 * 2,420, 15 * 2, 15 * 2);
 			c.add (dv);
 			dv.setName ("dv" + (i+1));
@@ -103,7 +111,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		mapa.addMouseListener (new TratadorMouse (mapa));
 		
 		terminei = new JButton ("Terminei");
-		//terminei.setEnabled (false);
+		terminei.setEnabled (false);
 		terminei.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				if (numJogador == 1)
@@ -145,13 +153,27 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		setVisible (true);
 	}
 	
+	public int getJogador ()
+	{
+		return jog;
+	}
+	
+	public void deletaArmaView (Arma armaSelecionada)
+	{
+		for (ArmaView av: armasViews)
+		{
+			if (av.getArma () == armaSelecionada)
+			{
+				remove (av);
+				repaint ();
+			}
+		}
+	}
+	
 	@Override
 	public void update (Object obj)
 	{
 		if (((boolean) obj))
-		{
 			terminei.setEnabled (true);
-			InformacoesGlobais.getInformacoesGlobais ().getJogador (jog).removeObserver (this);
-		}
 	}
 }

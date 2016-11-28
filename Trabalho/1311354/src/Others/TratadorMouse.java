@@ -34,29 +34,18 @@ public class TratadorMouse implements MouseListener
 			System.out.println (c.getName ());
 			ArmaView a = (ArmaView) c;
 			PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot (c);
-			int jog = frame.jog;
+			int jog = frame.getJogador ();
 			System.out.println (jog);
 			
 			if (a.getArma ().getDisponivel () && !a.getArma ().getTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
 			{
 				a.getArma ().setEmTransicao (true);
-				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
-				Jogador j = inf.getJogador (jog);
-				if (c.getName () == "cv")
-					j.atualizaArmasPosicionadas (0, true);
-				else
-					j.atualizaArmasPosicionadas (Integer.parseInt (c.getName ().replaceAll("[^0-9]", "")), true);
 			}
 			else if (a.getArma ().getTransicao ()) 
 			{
 				a.getArma ().setEmTransicao (false);
-				InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
-				Jogador j1 = inf.getJogador (1);
-				if (c.getName () == "cv")
-					j1.atualizaArmasPosicionadas (0, false);
-				else
-					j1.atualizaArmasPosicionadas (Integer.parseInt (c.getName ().replaceAll("[^0-9]", "")), false);
 			}
+			a.repaint ();
 		}
 		else if (c.getName ().contains ("mapa"))
 		{
@@ -74,16 +63,18 @@ public class TratadorMouse implements MouseListener
 			{
 				Mapa m = (Mapa) c;
 				Point p = m.getPosicaoNoMapa (e.getX (), e.getY ());
-				Boolean conseguiuPosicionar = jog.posicionarArmaNoTabuleiro (p.x, p.y, armaSelecionada);
+				boolean conseguiuPosicionar = jog.posicionarArmaNoTabuleiro (p.x, p.y, armaSelecionada);
 				m.marcaMapa (jog.getMeuTabuleiro ());
 				System.out.println ("Conseguiu posicionar arma: " + conseguiuPosicionar);
 				if (conseguiuPosicionar)
+				{
+					PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot (c);
 					armaSelecionada.setEmTransicao (false);
+					armaSelecionada.setUsada ();
+					frame.deletaArmaView (armaSelecionada);
+					jog.verificaArmasUsadas ();
+				}
 			}
-			
-//			jog.marcarMeuTabuleiro(p.x, p.y);
-//			m.pintaRetanguloNaPosicao(p, Color.red);
-//			System.out.println ("Posicao do mouse: (" + e.getX () + "," + e.getY () + ")");
 		}
 	}
 }

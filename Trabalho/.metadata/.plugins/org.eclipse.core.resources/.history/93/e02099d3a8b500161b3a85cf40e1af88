@@ -1,0 +1,18 @@
+package Model;
+
+public enum CoresArmas
+{
+	Vazio,
+	VazioAtingido,
+	Couracado,
+	CouracadoSelecionado,
+	Submarino,
+	SubmarinoSelecionado,
+	Cruzador,
+	CruzadorSelecionado,
+	Hidroaviao,
+	HidroaviaoSelecionado,
+	Destroyer,
+	DestroyerSelecionado,
+	Destruida
+}

@@ -153,24 +153,26 @@ public class Arma
 		usada = true;
 	}
 	
+	public boolean getUsada ()
+	{
+		return usada;
+	}
+	
 	public void setEmTransicao (Boolean b)
 	{
 		emTransicao = b;
 		setSelecionada (b);
-//		repaint ();
 	}
 	
 	public void setDisponivel (Boolean b)
 	{
 		disponivel = b;
-//		repaint ();
 	}
 	
 	public void setIndisponivel ()
 	{
 		disponivel = false;
 		emTransicao = false;
-//		repaint ();
 	}
 	
 	public boolean getDisponivel ()

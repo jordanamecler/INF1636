@@ -1,5 +1,7 @@
 package View;
 
+import Model.CoresMapa;
+
 import java.awt.*;
 import javax.swing.JPanel;
 import java.awt.geom.*;
@@ -50,32 +52,31 @@ public class Mapa extends JPanel
 				Rectangle2D rt = new Rectangle2D.Double (leftX, topY, larg, alt);
 				
 				if (bloqueado)
-					g2d.setColor (new Color (177, 203, 255));
+					g2d.setColor (CoresMapa.Bloqueado.getColor ());
 				else {
 					switch (retangulos[j][i])
 					{
 						case 0:
-							g2d.setColor (Color.white);
+							g2d.setColor (CoresMapa.Vazio.getColor ());
 							break;
 						case 1:
-							g2d.setColor (Color.orange);
+							g2d.setColor (CoresMapa.Couracado.getColor ());
 							break;
 						case 2:
-							g2d.setColor (Color.blue);
+							g2d.setColor (CoresMapa.Submarino.getColor ());
 							break;
 						case 3:
-							g2d.setColor (Color.green);
+							g2d.setColor (CoresMapa.Cruzador.getColor ());
 							break;
 						case 4:
-							g2d.setColor (Color.CYAN);
+							g2d.setColor (CoresMapa.Hidroaviao.getColor ());
 							break;
 						case 5:
-							g2d.setColor (Color.black);
+							g2d.setColor (CoresMapa.Destroyer.getColor ());
 							break;
 						case 6:
-							g2d.setColor (Color.gray);
-							break;
-						
+							g2d.setColor (CoresMapa.Destruida.getColor ());
+							break;	
 					}
 				}
 				g2d.fill (rt);

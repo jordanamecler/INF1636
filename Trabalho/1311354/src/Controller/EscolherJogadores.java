@@ -57,7 +57,15 @@ public class EscolherJogadores extends JFrame
 		c.add (jog1);
 		c.add (jog2);
 		c.add (comecar);
-		setSize (LARG_DEFAULT, ALT_DEFAULT);
+		
+		Toolkit tk = Toolkit.getDefaultToolkit ();
+		Dimension screenSize = tk.getScreenSize ();
+		int sl = screenSize.width;
+		int sa = screenSize.height;
+		int x = sl/2 - LARG_DEFAULT/2;
+		int y = sa/2 - ALT_DEFAULT/2;
+		
+		setBounds (x, y, LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		setVisible (true);
 	}
