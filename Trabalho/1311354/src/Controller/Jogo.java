@@ -41,6 +41,38 @@ public class Jogo extends JFrame
 		
 		mapa1.setBloqueado (true);
 		mapa2.setBloqueado (true);
+		
+		for (int i = 0; i < 15; i++)
+		{
+			JLabel legendaX1 = new JLabel ();
+			legendaX1.setText (Integer.toString (i + 1));
+			legendaX1.setBounds (500 + 20 * i, 100, 20, 25);
+			legendaX1.setHorizontalAlignment (JLabel.CENTER);
+			
+			JLabel legendaX2 = new JLabel ();
+			legendaX2.setText (Integer.toString (i + 1));
+			legendaX2.setBounds (100 + 20 * i, 100, 20, 25);
+			legendaX2.setHorizontalAlignment (JLabel.CENTER);
+			
+			c.add (legendaX1);
+			c.add (legendaX2);
+		}
+		
+		for (int i = 0; i < 15; i++)
+		{
+			JLabel legendaY1 = new JLabel ();
+			legendaY1.setText (Character.toString ((char) (i + 65)));
+			legendaY1.setBounds (475, 125 + 20 * i, 20, 25);
+			legendaY1.setHorizontalAlignment (JLabel.CENTER);
+			
+			JLabel legendaY2 = new JLabel ();
+			legendaY2.setText (Character.toString ((char) (i + 65)));
+			legendaY2.setBounds (75, 125 + 20 * i, 20, 25);
+			legendaY2.setHorizontalAlignment (JLabel.CENTER);
+			
+			c.add (legendaY2);
+			c.add (legendaY1);
+		}
 
 		JLabel label = new JLabel ();
 		label.setText ("Visão bloqueada, " + j1.getNome () + " deve clicar no botão para desbloquear sua visão");

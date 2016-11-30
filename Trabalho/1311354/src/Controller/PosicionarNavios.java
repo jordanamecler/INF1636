@@ -46,7 +46,25 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		
 		// Mapa para escolher as posicoes das armas
 		mapa = new Mapa ();
-	
+		
+		for (int i = 0; i < 15; i++)
+		{
+			JLabel legendaX = new JLabel ();
+			legendaX.setText (Integer.toString (i + 1));
+			legendaX.setBounds (500 + 20 * i, 100, 20, 25);
+			legendaX.setHorizontalAlignment (JLabel.CENTER);
+			c.add (legendaX);
+		}
+		
+		for (int i = 0; i < 15; i++)
+		{
+			JLabel legendaY = new JLabel ();
+			legendaY.setText (Character.toString ((char) (i + 65)));
+			legendaY.setBounds (475, 125 + 20 * i, 20, 25);
+			legendaY.setHorizontalAlignment (JLabel.CENTER);
+			c.add (legendaY);
+		}
+		
 		// Armas
 		
 		// 1x couracado

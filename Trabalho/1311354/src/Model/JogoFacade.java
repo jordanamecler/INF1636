@@ -15,7 +15,5 @@ public class JogoFacade
 			inf.setJogadorCorrente (inf.getJogador (2));
 		else
 			inf.setJogadorCorrente (inf.getJogador (1));
-		
-		
 	}
 }
