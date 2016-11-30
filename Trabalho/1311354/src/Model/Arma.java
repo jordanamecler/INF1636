@@ -10,13 +10,9 @@ public class Arma
 	private int[][] estado = new int[2][5]; // 0 = vazio, 1 = ok, 2 = destruido
 	private TipoDeArma tipo;
 	private Point posicao;
-	private Boolean selecionada = false;
 	private Direcao direcao = Direcao.Padrao;
 	private int largura;
 	private int altura;
-	private boolean usada = false;
-	private boolean disponivel = true;
-	private boolean emTransicao = false;
 	private EstadoPosicionamento estadoPosicionamento = EstadoPosicionamento.Disponivel;
 	
 	public Arma (TipoDeArma tipo)
@@ -104,16 +100,6 @@ public class Arma
 	{
 		this.posicao = posicao;
 	}
-
-	public Boolean getSelecionada ()
-	{
-		return selecionada;
-	}
-
-	public void setSelecionada (Boolean selecionada)
-	{
-		this.selecionada = selecionada;
-	}
 	
 	public Direcao getDirecao ()
 	{
@@ -148,49 +134,14 @@ public class Arma
 	{
 		return altura;
 	}
-	
-	public void setUsada ()
-	{
-		usada = true;
-	}
-	
-	public boolean getUsada ()
-	{
-		return usada;
-	}
-	
-	public void setEmTransicao (Boolean b)
-	{
-		emTransicao = b;
-		setSelecionada (b);
-	}
-	
-	public void setDisponivel (Boolean b)
-	{
-		disponivel = b;
-	}
-	
-	public void setIndisponivel ()
-	{
-		disponivel = false;
-		emTransicao = false;
-	}
-	
-	public boolean getDisponivel ()
-	{
-		return disponivel;
-	}
-	
-	public boolean getTransicao ()
-	{
-		return emTransicao;
-	}
 
-	public EstadoPosicionamento getEstadoPosicionamento() {
+	public EstadoPosicionamento getEstadoPosicionamento ()
+	{
 		return estadoPosicionamento;
 	}
 
-	public void setEstadoPosicionamento(EstadoPosicionamento estadoPosicionamento) {
+	public void setEstadoPosicionamento (EstadoPosicionamento estadoPosicionamento)
+	{
 		this.estadoPosicionamento = estadoPosicionamento;
 	}
 }

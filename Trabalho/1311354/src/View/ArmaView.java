@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import Model.Arma;
 import Model.CoresMapa;
+import Model.EstadoPosicionamento;
 
 public class ArmaView extends JPanel
 {	
@@ -32,7 +33,7 @@ public class ArmaView extends JPanel
 		int[][] pontos = arma.getPontos ();
 		Color color = Color.white;
 		
-		if (arma.getDisponivel () && !arma.getTransicao ())
+		if (arma.getEstadoPosicionamento () == EstadoPosicionamento.Disponivel)
 		{
 			switch (arma.getTipoDeArma ())
 			{
@@ -55,7 +56,7 @@ public class ArmaView extends JPanel
 					break;
 			}
 		}
-		else if (arma.getTransicao ())
+		else if (arma.getEstadoPosicionamento () == EstadoPosicionamento.EmTransicao)
 		{
 			switch (arma.getTipoDeArma ())
 			{

@@ -5,10 +5,11 @@ public class InformacoesGlobais
 	private static InformacoesGlobais informacoesGlobais = null;
 	private Jogador jogador1 = new Jogador ();
 	private Jogador jogador2 = new Jogador ();
-	
+	private Jogador jogadorCorrente;
 	
 	private InformacoesGlobais ()
 	{
+		
 	}
 
 	public static InformacoesGlobais getInformacoesGlobais ()
@@ -26,11 +27,13 @@ public class InformacoesGlobais
 			return jogador2;
 	}
 	
-//	public void setJogador (int num, String nome)
-//	{
-//		if (num == 1)
-//			jogador1 = nome;
-//		else if (num ==2 )
-//			jogador2 = nome;
-//	}
+	public Jogador getJogadorCorrente ()
+	{
+		return jogadorCorrente;
+	}
+	
+	public void setJogadorCorrente (Jogador jog)
+	{
+		jogadorCorrente = jog;
+	}
 }

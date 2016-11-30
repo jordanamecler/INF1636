@@ -24,7 +24,8 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	private JButton terminei;
-	private int jog;
+	private Mapa mapa;
+
 	private List <ArmaView> armasViews = new ArrayList <ArmaView> ();
 	
 	public PosicionarNavios (int numJogador)
@@ -32,19 +33,19 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		setTitle ("Batalha Naval");
 		Container c = getContentPane ();
 		
-		this.addKeyListener(new TratadorTeclado());
+		this.addKeyListener (new TratadorTeclado ());
+		this.addMouseListener (new TratadorMousePosicao (this));
 		
-		
-		jog = numJogador;
-		
+
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog = inf.getJogador (numJogador);
+		inf.setJogadorCorrente (jog);
 		
 		JLabel label = new JLabel ();
 		label.setText (jog.getNome ());
 		
 		// Mapa para escolher as posicoes das armas
-		Mapa mapa = new Mapa ();
+		mapa = new Mapa ();
 	
 		// Armas
 		
@@ -157,9 +158,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		setVisible (true);
 	}
 	
-	public int getJogador ()
+	public Mapa getMapa ()
 	{
-		return jog;
+		return mapa;
 	}
 	
 	public void deletaArmaView (Arma armaSelecionada)
@@ -172,6 +173,13 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 				repaint ();
 			}
 		}
+	}
+	
+	public void repintaArmaView (Arma arma)
+	{
+		for (ArmaView av: armasViews)
+			if (av.getArma () == arma)
+				repaint ();
 	}
 	
 	@Override

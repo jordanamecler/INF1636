@@ -12,8 +12,9 @@ public class Jogador implements ObservadoIF
 	private String nome;
 	private int[][] meuTabuleiro = new int[15][15];
 	private int[][] tabuleiroInimigo = new int[15][15];
+	private int[][] tabuleiroAux = new int[15][15];
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
-	private List<Arma> armas = new ArrayList <Arma> ();
+	private List <Arma> armas = new ArrayList <Arma> ();
 	
 	public String getNome ()
 	{
@@ -35,6 +36,11 @@ public class Jogador implements ObservadoIF
 		return meuTabuleiro;
 	}
 	
+	public int[][] getTabuleiroAux ()
+	{
+		return tabuleiroAux;
+	}
+	
 	public void marcarMeuTabuleiro (int x, int y)
 	{
 		this.meuTabuleiro[x][y] = 1;
@@ -48,7 +54,6 @@ public class Jogador implements ObservadoIF
 	public boolean posicionarArmaNoTabuleiro (int x, int y, Arma a)
 	{
 		int[][] pontosDaArma = a.getPontos ();
-		int[][] tabuleiroAux = new int[15][15];
 
 		for(int i=0; i< meuTabuleiro.length; i++)
 			  for (int j=0; j< meuTabuleiro[i].length; j++)
@@ -68,20 +73,18 @@ public class Jogador implements ObservadoIF
 					int posX = x + i, posY = y + j - 1;
 					if (!testaPosicaoValida (posX, posY, a))
 					{
+						copiaTabuleiro (tabuleiroAux, meuTabuleiro);
 						return false;
 					}
 					tabuleiroAux[posX][posY] = a.getTipoDeArma ().ordinal ();
 				}
 			}
 		}
-		meuTabuleiro = tabuleiroAux;
 		return true;
 	}
 	
 	public boolean testaPosicaoValida (int x, int y, Arma arma)
 	{
-		
-		
 		for (int i = -1; i < 2; i++)
 		{
 			for (int j = -1; j < 2; j++)
@@ -95,31 +98,52 @@ public class Jogador implements ObservadoIF
 		return true;
 	}
 	
-	public void verificaArmasUsadas ()
+	public void atualizaTabuleiro ()
 	{
-		for (Arma arma: armas)
-			if (arma.getEstadoPosicionamento() != EstadoPosicionamento.Posicionada)
-				return;
-//			if (!arma.getUsada ())
-//				return;
-		this.notifyObservers ();
+		copiaTabuleiro (meuTabuleiro, tabuleiroAux);
 	}
 	
-	public Arma getArmaSelecionada()
+	private void copiaTabuleiro (int[][] tabuleiro1, int[][] tabuleiro2)
+	{
+		for(int i=0; i< tabuleiro2.length; i++)
+			  for (int j=0; j< tabuleiro2[i].length; j++)
+				  tabuleiro1[i][j] = tabuleiro2[i][j];
+	}
+	
+	public Arma getArmaEmEstado (EstadoPosicionamento estado)
 	{
 		for (Arma a: armas)
 		{
-			if (a.getEstadoPosicionamento() == EstadoPosicionamento.EmTransicao)
+			if (a.getEstadoPosicionamento () == estado)
 				return a;
-//			if (a.getSelecionada () == true)
-//				return a;
 		}
 		return null;
+	}
+	
+	public boolean podeSelecionarArma ()
+	{
+		for (Arma a: armas)
+		{
+			if (a.getEstadoPosicionamento () == EstadoPosicionamento.EmTransicao ||
+				a.getEstadoPosicionamento () == EstadoPosicionamento.Girando)
+				return false;
+		}
+		
+		return true;
 	}
 	
 	public List <Arma> getListaArmas ()
 	{
 		return armas;
+	}
+	
+	public void verificaArmasUsadas ()
+	{
+		for (Arma arma: armas)
+			if (arma.getEstadoPosicionamento() != EstadoPosicionamento.Posicionada)
+				return;
+		
+		this.notifyObservers ();
 	}
 	
 	@Override
