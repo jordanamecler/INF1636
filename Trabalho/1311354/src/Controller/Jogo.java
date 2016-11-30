@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 import Model.InformacoesGlobais;
 import Model.Jogador;
+import Model.JogoFacade;
 import View.Mapa;
 
 public class Jogo extends JFrame
@@ -19,7 +20,8 @@ public class Jogo extends JFrame
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
-	
+	JogoFacade facade = null;
+
 	public Jogo ()
 	{
 		setTitle ("Batalha Naval");
@@ -46,6 +48,7 @@ public class Jogo extends JFrame
 		JButton terminei = new JButton ("Começar Jogo!");
 		terminei.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				
 			}
 		});
 		
