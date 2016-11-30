@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.EstadoPosicionamento;
 import Others.ObservadoIF;
 import Others.ObservadorIF;
 
@@ -97,8 +98,10 @@ public class Jogador implements ObservadoIF
 	public void verificaArmasUsadas ()
 	{
 		for (Arma arma: armas)
-			if (!arma.getUsada ())
+			if (arma.getEstadoPosicionamento() != EstadoPosicionamento.Posicionada)
 				return;
+//			if (!arma.getUsada ())
+//				return;
 		this.notifyObservers ();
 	}
 	
@@ -106,8 +109,10 @@ public class Jogador implements ObservadoIF
 	{
 		for (Arma a: armas)
 		{
-			if (a.getSelecionada () == true)
+			if (a.getEstadoPosicionamento() == EstadoPosicionamento.EmTransicao)
 				return a;
+//			if (a.getSelecionada () == true)
+//				return a;
 		}
 		return null;
 	}

@@ -1,7 +1,7 @@
 package Model;
 
 import Model.Direcao;
-
+import Model.EstadoPosicionamento;
 import java.awt.Point;
 
 public class Arma
@@ -17,6 +17,7 @@ public class Arma
 	private boolean usada = false;
 	private boolean disponivel = true;
 	private boolean emTransicao = false;
+	private EstadoPosicionamento estadoPosicionamento = EstadoPosicionamento.Disponivel;
 	
 	public Arma (TipoDeArma tipo)
 	{
@@ -183,5 +184,13 @@ public class Arma
 	public boolean getTransicao ()
 	{
 		return emTransicao;
+	}
+
+	public EstadoPosicionamento getEstadoPosicionamento() {
+		return estadoPosicionamento;
+	}
+
+	public void setEstadoPosicionamento(EstadoPosicionamento estadoPosicionamento) {
+		this.estadoPosicionamento = estadoPosicionamento;
 	}
 }

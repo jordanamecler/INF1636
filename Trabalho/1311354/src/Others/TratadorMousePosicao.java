@@ -9,14 +9,15 @@ import Controller.PosicionarNavios;
 import Model.Arma;
 import Model.InformacoesGlobais;
 import Model.Jogador;
+import Model.EstadoPosicionamento;
 import View.ArmaView;
 import View.Mapa;
 
-public class TratadorMouse implements MouseListener
+public class TratadorMousePosicao implements MouseListener
 {
 	private Component c;
 	
-	public TratadorMouse (Component x)
+	public TratadorMousePosicao (Component x)
 	{
 		c = x;
 	}
@@ -37,14 +38,21 @@ public class TratadorMouse implements MouseListener
 			int jog = frame.getJogador ();
 			System.out.println (jog);
 			
-			if (a.getArma ().getDisponivel () && !a.getArma ().getTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
-			{
-				a.getArma ().setEmTransicao (true);
+			if (a.getArma().getEstadoPosicionamento() == EstadoPosicionamento.Disponivel && a.clicouNaArma (e.getX (), e.getY ())) {
+				a.getArma().setEstadoPosicionamento(EstadoPosicionamento.EmTransicao);
 			}
-			else if (a.getArma ().getTransicao ()) 
-			{
-				a.getArma ().setEmTransicao (false);
+			else if (a.getArma().getEstadoPosicionamento() == EstadoPosicionamento.EmTransicao) {
+				a.getArma().setEstadoPosicionamento(EstadoPosicionamento.Disponivel);
 			}
+			
+//			if (a.getArma ().getDisponivel () && !a.getArma ().getTransicao () && a.clicouNaArma (e.getX (), e.getY ()))
+//			{
+//				a.getArma ().setEmTransicao (true);
+//			}
+//			else if (a.getArma ().getTransicao ()) 
+//			{
+//				a.getArma ().setEmTransicao (false);
+//			}
 			a.repaint ();
 		}
 		else if (c.getName ().contains ("mapa"))
@@ -69,8 +77,9 @@ public class TratadorMouse implements MouseListener
 				if (conseguiuPosicionar)
 				{
 					PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot (c);
-					armaSelecionada.setEmTransicao (false);
-					armaSelecionada.setUsada ();
+//					armaSelecionada.setEmTransicao (false);
+//					armaSelecionada.setUsada ();
+					armaSelecionada.setEstadoPosicionamento(EstadoPosicionamento.Girando);
 					frame.deletaArmaView (armaSelecionada);
 					jog.verificaArmasUsadas ();
 				}

@@ -7,7 +7,8 @@ import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.TipoDeArma;
 import Others.ObservadorIF;
-import Others.TratadorMouse;
+import Others.TratadorMousePosicao;
+import Others.TratadorTeclado;
 import View.ArmaView;
 import View.Mapa;
 
@@ -31,6 +32,9 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		setTitle ("Batalha Naval");
 		Container c = getContentPane ();
 		
+		this.addKeyListener(new TratadorTeclado());
+		
+		
 		jog = numJogador;
 		
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
@@ -52,7 +56,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		armasViews.add (cv);
 		cv.setBounds (50, 100, 15 * 5, 15 * 2);
 		cv.setName ("cv");
-		cv.addMouseListener (new TratadorMouse (cv));
+		cv.addMouseListener (new TratadorMousePosicao (cv));
 		c.add (cv);
 		
 		// 4x submarinos
@@ -65,7 +69,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			sv.setBounds (50 + i * 25  ,180 , 15 , 15 * 2);
 			c.add (sv);
 			sv.setName ("sv" + (i+1));
-			sv.addMouseListener (new TratadorMouse (sv));
+			sv.addMouseListener (new TratadorMousePosicao (sv));
 		}
 		
 		// 2x cruzadores
@@ -78,7 +82,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			crv.setBounds (50 + i * 25 * 4,260, 15 * 4, 15 * 2);
 			c.add (crv);
 			crv.setName ("crv" + (i+1));
-			crv.addMouseListener (new TratadorMouse (crv));
+			crv.addMouseListener (new TratadorMousePosicao (crv));
 		}
 		
 		// 5x hidroavioes
@@ -91,7 +95,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			hv.setBounds (50 + i * 25 * 3,340, 15 * 3, 15 * 2);
 			c.add (hv);
 			hv.setName ("hv" + (i+1));
-			hv.addMouseListener (new TratadorMouse (hv));
+			hv.addMouseListener (new TratadorMousePosicao (hv));
 		}
 		
 		// 3x destroyers
@@ -104,11 +108,11 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			dv.setBounds (50 + i * 25 * 2,420, 15 * 2, 15 * 2);
 			c.add (dv);
 			dv.setName ("dv" + (i+1));
-			dv.addMouseListener (new TratadorMouse (dv));
+			dv.addMouseListener (new TratadorMousePosicao (dv));
 		}	
 		
 		mapa.setName ("mapa" + numJogador);
-		mapa.addMouseListener (new TratadorMouse (mapa));
+		mapa.addMouseListener (new TratadorMousePosicao (mapa));
 		
 		terminei = new JButton ("Terminei");
 		terminei.setEnabled (false);
