@@ -51,13 +51,17 @@ public class Jogador implements ObservadoIF
 		this.tabuleiroInimigo[x][y] = 1;
 	}
 	
-	public boolean posicionarArmaNoTabuleiro (int x, int y, Arma a)
+	public boolean posicionarArmaNoTabuleiro (int x, int y, Arma a, boolean girando)
 	{
 		int[][] pontosDaArma = a.getPontos ();
 
-		for(int i=0; i< meuTabuleiro.length; i++)
-			  for (int j=0; j< meuTabuleiro[i].length; j++)
-				  tabuleiroAux[i][j] = meuTabuleiro[i][j];
+		copiaTabuleiro (tabuleiroAux, meuTabuleiro);
+		
+		if (girando)
+		{
+			y = a.getPrimeiroPontoNoMapa ().x;
+			x = a.getPrimeiroPontoNoMapa ().y;
+		}
 		
 		if (x + a.getLargura () - 1 > 14)
 			return false;
@@ -67,10 +71,18 @@ public class Jogador implements ObservadoIF
 		for (int i = 0; i < 5; i++ )
 		{
 			for (int j = 1; j >= 0; j-- )
-			{
+			{	
 				if (pontosDaArma[j][i] == 1)
 				{
 					int posX = x + i, posY = y + j - 1;
+					
+					if (girando)
+					{
+						int aux = posX;
+						posX = posY;
+						posY = aux;
+					}
+					
 					if (!testaPosicaoValida (posX, posY, a))
 					{
 						copiaTabuleiro (tabuleiroAux, meuTabuleiro);
@@ -80,6 +92,16 @@ public class Jogador implements ObservadoIF
 				}
 			}
 		}
+		
+		for (Arma arma: armas)
+			if (arma == a)
+			{
+				if (girando)
+					arma.setPrimeiroPontoNoMapa (y, x); 
+				else
+					arma.setPrimeiroPontoNoMapa (x, y);
+				return true;
+			}
 		return true;
 	}
 	

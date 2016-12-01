@@ -10,6 +10,7 @@ public class Arma
 	private int[][] estado = new int[2][5]; // 0 = vazio, 1 = ok, 2 = destruido
 	private TipoDeArma tipo;
 	private Point posicao;
+	private Point primeiroPontoNoMapa = new Point ();
 	private Direcao direcao = Direcao.Padrao;
 	private int largura;
 	private int altura;
@@ -99,6 +100,17 @@ public class Arma
 	public void setPosicao (Point posicao)
 	{
 		this.posicao = posicao;
+	}
+	
+	public Point getPrimeiroPontoNoMapa ()
+	{
+		return primeiroPontoNoMapa;
+	}
+	
+	public void setPrimeiroPontoNoMapa (int x, int y)
+	{
+		primeiroPontoNoMapa.x = x;
+		primeiroPontoNoMapa.y = y;
 	}
 	
 	public Direcao getDirecao ()

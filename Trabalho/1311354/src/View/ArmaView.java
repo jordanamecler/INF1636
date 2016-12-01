@@ -13,7 +13,6 @@ public class ArmaView extends JPanel
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private Arma arma;
 	
-	
 	public ArmaView (Arma a)
 	{
 		arma = a;
