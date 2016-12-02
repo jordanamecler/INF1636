@@ -1,4 +1,4 @@
-package Controller;
+package View;
 
 import javax.swing.*;
 
@@ -7,25 +7,27 @@ import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.TipoDeArma;
 import Others.ObservadorIF;
+import Others.ObservadoIF;
 import Others.TratadorMousePosicao;
 import Others.TratadorTeclado;
-import View.ArmaView;
-import View.Mapa;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Vector;
 
-public class PosicionarNavios extends JFrame implements ObservadorIF
+public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	private JButton terminei;
 	private Mapa mapa;
-
+	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	private List <ArmaView> armasViews = new ArrayList <ArmaView> ();
 	
 	public PosicionarNavios (int numJogador)
@@ -34,8 +36,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 		Container c = getContentPane ();
 		
 		this.addKeyListener (new TratadorTeclado ());
-		this.addMouseListener (new TratadorMousePosicao (this));
-		
+		this.addMouseListener (new TratadorMousePosicao (this));	
 
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog = inf.getJogador (numJogador);
@@ -139,12 +140,12 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 			public void actionPerformed (ActionEvent e) {
 				if (numJogador == 1)
 				{
-					new PosicionarNavios (2);
+					notifyObservers("jogador1_posicionou_armas");
 					dispose ();
 				}
 				else
 				{
-					new Jogo ();
+					notifyObservers("jogador2_posicionou_armas");
 					dispose ();
 				}
 			}
@@ -201,9 +202,34 @@ public class PosicionarNavios extends JFrame implements ObservadorIF
 	}
 	
 	@Override
-	public void update (Object obj)
+	public void update (String caso, Object obj)
 	{
 		if (((boolean) obj))
 			terminei.setEnabled (true);
+	}
+
+	@Override
+	public void registerObserver(ObservadorIF observer)
+	{
+		observers.add (observer);
+	}
+
+	@Override
+	public void removeObserver(ObservadorIF observer) 
+	{
+		observers.remove (observer);
+	}
+
+	@Override
+	public void notifyObservers(String mensagem) 
+	{
+		ListIterator<ObservadorIF> li = observers.listIterator();
+		
+		while(li.hasNext()) {
+			ObservadorIF ob = (ObservadorIF) li.next();
+			System.out.println ("Notificando observers!");
+			ob.update (mensagem, null);
+			li.remove();
+		}
 	}
 }

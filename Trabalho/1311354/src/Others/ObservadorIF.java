@@ -2,5 +2,5 @@ package Others;
 
 public interface ObservadorIF
 {
-	public void update (Object obj);
+	public void update (String caso, Object obj);
 }

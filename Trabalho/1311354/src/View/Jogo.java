@@ -1,4 +1,4 @@
-package Controller;
+package View;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.JogoFacade;
-import View.Mapa;
 
 public class Jogo extends JFrame
 {

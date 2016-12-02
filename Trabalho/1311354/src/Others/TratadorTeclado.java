@@ -2,12 +2,11 @@ package Others;
 
 import Model.InformacoesGlobais;
 import Model.Jogador;
+import View.PosicionarNavios;
 import Model.Arma;
 import Model.EstadoPosicionamento;
 
 import java.awt.event.*;
-
-import Controller.PosicionarNavios;
 
 public class TratadorTeclado implements KeyListener
 {

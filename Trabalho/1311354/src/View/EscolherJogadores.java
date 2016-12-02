@@ -1,18 +1,27 @@
-package Controller;
+package View;
 
 import javax.swing.*;
 
 import Model.InformacoesGlobais;
 import Model.Jogador;
+import Others.ObservadoIF;
+import Others.ObservadorIF;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Vector;
 
-public class EscolherJogadores extends JFrame
+public class EscolherJogadores extends JFrame implements ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 410;
 	private final int ALT_DEFAULT = 300;
+	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
+	private JTextField jog1;
+	private JTextField jog2;
 	
 	public EscolherJogadores ()
 	{
@@ -21,8 +30,8 @@ public class EscolherJogadores extends JFrame
 		JLabel jogador2 = new JLabel ("Jogador 2");
 		setTitle ("Jogadores");
 		Container c = getContentPane ();
-		JTextField jog1 = new JTextField ();
-		JTextField jog2 = new JTextField ();
+		jog1 = new JTextField ();
+		jog2 = new JTextField ();
 		JButton comecar = new JButton ("Começar");
 		comecar.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -31,12 +40,8 @@ public class EscolherJogadores extends JFrame
 					if (jog1.getText ().equals (jog2.getText ()))
 						JOptionPane.showMessageDialog (null, "Os dois jogadores devem ter nomes diferentes");
 					else
-					{	InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
-						Jogador j1 = inf.getJogador (1);
-						Jogador j2 = inf.getJogador (2);
-						j1.setNome (jog1.getText ());
-						j2.setNome (jog2.getText ());
-						new PosicionarNavios (1);
+					{							
+						notifyObservers("escolheu_jogadores");
 						dispose ();
 					}
 				}
@@ -66,5 +71,33 @@ public class EscolherJogadores extends JFrame
 		setBounds (x, y, LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		setVisible (true);
+	}
+
+	@Override
+	public void registerObserver(ObservadorIF observer)
+	{
+		observers.add (observer);
+	}
+
+	@Override
+	public void removeObserver(ObservadorIF observer) 
+	{
+		observers.remove (observer);
+	}
+
+	@Override
+	public void notifyObservers(String mensagem) 
+	{
+		ListIterator<ObservadorIF> li = observers.listIterator();
+		
+		while(li.hasNext()) {
+			ObservadorIF ob = (ObservadorIF) li.next();
+			System.out.println ("Notificando observers!");
+			Vector<String> vector = new Vector<String>(2);
+    		vector.addElement(this.jog1.getText());
+    		vector.addElement(this.jog2.getText());
+			ob.update (mensagem, vector);
+			li.remove();
+		}
 	}
 }

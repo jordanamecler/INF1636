@@ -5,13 +5,13 @@ import java.awt.event.*;
 
 import javax.swing.SwingUtilities;
 
-import Controller.PosicionarNavios;
 import Model.Arma;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.EstadoPosicionamento;
 import View.ArmaView;
 import View.Mapa;
+import View.PosicionarNavios;
 
 public class TratadorMousePosicao implements MouseListener
 {

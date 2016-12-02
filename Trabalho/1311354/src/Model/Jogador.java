@@ -165,7 +165,7 @@ public class Jogador implements ObservadoIF
 			if (arma.getEstadoPosicionamento() != EstadoPosicionamento.Posicionada)
 				return;
 		
-		this.notifyObservers ();
+		this.notifyObservers ("posicionou_todas_armas");
 	}
 	
 	@Override
@@ -181,7 +181,7 @@ public class Jogador implements ObservadoIF
     }
 
     @Override
-    public void notifyObservers ()
+    public void notifyObservers (String mensagem)
     {
     	// Chama o método de atualização de todos os observers disponíveis
     	for (ObservadorIF ob : observers)
@@ -189,7 +189,7 @@ public class Jogador implements ObservadoIF
     		if (ob == null)
     			return;
         	System.out.println ("Notificando observers!");
-        	ob.update (true);
+        	ob.update (mensagem, true);
         }
     	
     	this.removeObserver (observers.get (0));
