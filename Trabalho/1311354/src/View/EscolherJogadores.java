@@ -41,7 +41,7 @@ public class EscolherJogadores extends JFrame implements ObservadoIF
 						JOptionPane.showMessageDialog (null, "Os dois jogadores devem ter nomes diferentes");
 					else
 					{							
-						notifyObservers("escolheu_jogadores");
+						notifyObservers("escolheu_jogadores", null);
 						dispose ();
 					}
 				}
@@ -86,7 +86,7 @@ public class EscolherJogadores extends JFrame implements ObservadoIF
 	}
 
 	@Override
-	public void notifyObservers(String mensagem) 
+	public void notifyObservers(String mensagem, Object obj) 
 	{
 		ListIterator<ObservadorIF> li = observers.listIterator();
 		

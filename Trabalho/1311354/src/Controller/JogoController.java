@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Point;
 import java.util.Vector;
 
 import View.ViewFacade;
@@ -8,7 +9,9 @@ import Model.Jogador;
 import Others.ObservadorIF;
 
 public class JogoController implements ObservadorIF {
-
+	
+	boolean jogoComecou = false;
+	
 	public JogoController() 
 	{	
 		ViewFacade.iniciaTelaEscolherJogadores(this);
@@ -28,7 +31,15 @@ public class JogoController implements ObservadorIF {
 				ViewFacade.inicializaTelaPosicionarNavios(this, 2);
 				break;
 			case "jogador2_posicionou_armas":
-				ViewFacade.inicializaJogo();
+				ViewFacade.inicializaJogo(this);
+				this.jogoComecou = true;
+				break;
+			case "mapa_clicado":
+				if (this.jogoComecou) 
+				{
+					Point p = (Point) obj;
+					System.out.println("Ataque na posicao " + p);
+				}
 				break;
 		}
 	}

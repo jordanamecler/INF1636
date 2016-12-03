@@ -1,12 +1,17 @@
 package View;
 
 import Model.CoresMapa;
+import Others.ObservadoIF;
+import Others.ObservadorIF;
 
 import java.awt.*;
 import javax.swing.JPanel;
 import java.awt.geom.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
-public class Mapa extends JPanel
+public class Mapa extends JPanel implements ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int TXT_X = 300;
@@ -15,6 +20,7 @@ public class Mapa extends JPanel
 	private int distanciaY = 125;
 	private int[][] retangulos = new int[15][15];
 	private boolean bloqueado = false;
+	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	
 	public Mapa ()
 	{
@@ -123,5 +129,30 @@ public class Mapa extends JPanel
 			}
 		}
 		repaint ();
+	}
+
+	@Override
+	public void registerObserver(ObservadorIF observer) {
+        observers.add (observer);
+		
+	}
+
+	@Override
+	public void removeObserver(ObservadorIF observer) {
+		observers.remove (observer);
+		
+	}
+
+	@Override
+	public void notifyObservers(String mensagem, Object obj) {
+		ListIterator<ObservadorIF> li = observers.listIterator();
+		
+		while(li.hasNext()) {
+			ObservadorIF ob = (ObservadorIF) li.next();
+			System.out.println ("Notificando observers!");
+			ob.update (mensagem, obj);
+			// nao remove observer nesse caso
+		}
+		
 	}
 }

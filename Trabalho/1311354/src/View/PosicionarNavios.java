@@ -140,12 +140,12 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 			public void actionPerformed (ActionEvent e) {
 				if (numJogador == 1)
 				{
-					notifyObservers("jogador1_posicionou_armas");
+					notifyObservers("jogador1_posicionou_armas", null);
 					dispose ();
 				}
 				else
 				{
-					notifyObservers("jogador2_posicionou_armas");
+					notifyObservers("jogador2_posicionou_armas", null);
 					dispose ();
 				}
 			}
@@ -221,7 +221,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 	}
 
 	@Override
-	public void notifyObservers(String mensagem) 
+	public void notifyObservers(String mensagem, Object obj) 
 	{
 		ListIterator<ObservadorIF> li = observers.listIterator();
 		

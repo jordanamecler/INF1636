@@ -15,7 +15,7 @@ public class ViewFacade {
 		new PosicionarNavios (numJogador).registerObserver(observador);;
 	}
 	
-	public static void inicializaJogo() {
-		new Jogo ();
+	public static void inicializaJogo(ObservadorIF observador) {
+		new Jogo (observador);
 	}
 }

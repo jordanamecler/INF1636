@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.JogoFacade;
+import Others.ObservadorIF;
 import Others.TratadorMouseJogo;
 
 public class Jogo extends JFrame
@@ -24,7 +25,7 @@ public class Jogo extends JFrame
 	private final int ALT_DEFAULT = 600;
 	JogoFacade facade = null;
 
-	public Jogo ()
+	public Jogo (ObservadorIF observador)
 	{
 		setTitle ("Batalha Naval");
 
@@ -40,6 +41,7 @@ public class Jogo extends JFrame
 		c.add(nomeJogadorLabel);
 		
 		Mapa mapa1 = new Mapa (100, 125);
+		mapa1.setName("mapa_inimigo");
 		mapa1.setLayout (null);
 		mapa1.addMouseListener (new TratadorMouseJogo(mapa1));
 		
@@ -106,6 +108,7 @@ public class Jogo extends JFrame
 				mapa2.setBloqueado (false);
 				mapa1.marcaMapa(j1.getTabuleiroInimigo());
 				mapa2.marcaMapa(j1.getMeuTabuleiro());
+				mapa1.registerObserver(observador);
 			}
 		});
 		
