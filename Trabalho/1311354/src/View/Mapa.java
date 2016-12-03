@@ -92,6 +92,10 @@ public class Mapa extends JPanel
 		repaint ();
 	}
 	
+	public boolean getBloquado () {
+		return this.bloqueado;
+	}
+	
 	public Point getPosicaoNoMapa (Integer x, Integer y)
 	{
 		Point p = new Point ();

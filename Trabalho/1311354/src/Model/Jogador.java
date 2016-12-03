@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import Model.EstadoPosicionamento;
 import Others.ObservadoIF;
@@ -163,7 +164,7 @@ public class Jogador implements ObservadoIF
 	{
 		for (Arma arma: armas)
 			if (arma.getEstadoPosicionamento() != EstadoPosicionamento.Posicionada)
-				return;
+				//return;
 		
 		this.notifyObservers ("posicionou_todas_armas");
 	}
@@ -183,15 +184,13 @@ public class Jogador implements ObservadoIF
     @Override
     public void notifyObservers (String mensagem)
     {
-    	// Chama o método de atualização de todos os observers disponíveis
-    	for (ObservadorIF ob : observers)
-        {
-    		if (ob == null)
-    			return;
-        	System.out.println ("Notificando observers!");
-        	ob.update (mensagem, true);
-        }
-    	
-    	this.removeObserver (observers.get (0));
+    	ListIterator<ObservadorIF> li = observers.listIterator();
+		
+		while(li.hasNext()) {
+			ObservadorIF ob = (ObservadorIF) li.next();
+			System.out.println ("Notificando observers!");
+			ob.update (mensagem, true);
+			li.remove();
+		}
     }
 }

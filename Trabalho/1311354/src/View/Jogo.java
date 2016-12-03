@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import javax.swing.JLabel;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.JogoFacade;
+import Others.TratadorMouseJogo;
 
 public class Jogo extends JFrame
 {
@@ -30,9 +33,17 @@ public class Jogo extends JFrame
 		Container c = getContentPane ();
 		c.setLayout (null);
 		
-		Mapa mapa1 = new Mapa (500, 125);
+		JLabel nomeJogadorLabel = new JLabel ();
+		nomeJogadorLabel.setText (j1.getNome());
+		nomeJogadorLabel.setBounds (300, 40, 200,40);
+		nomeJogadorLabel.setHorizontalAlignment (JLabel.CENTER);
+		c.add(nomeJogadorLabel);
+		
+		Mapa mapa1 = new Mapa (100, 125);
 		mapa1.setLayout (null);
-		Mapa mapa2 = new Mapa (100, 125);
+		mapa1.addMouseListener (new TratadorMouseJogo(mapa1));
+		
+		Mapa mapa2 = new Mapa (500, 125);
 		mapa2.setLayout (null);
 		
 		mapa1.setSize (300, 300);
@@ -40,6 +51,18 @@ public class Jogo extends JFrame
 		
 		mapa1.setBloqueado (true);
 		mapa2.setBloqueado (true);
+		
+		JLabel meuLabel = new JLabel ();
+		meuLabel.setText ("Meu mapa");
+		meuLabel.setBounds (540, 70,200,40);
+		meuLabel.setHorizontalAlignment (JLabel.CENTER);
+		c.add(meuLabel);
+		
+		JLabel inimigoLabel = new JLabel ();
+		inimigoLabel.setText ("Mapa do inimigo");
+		inimigoLabel.setBounds (140, 70,200,40);
+		inimigoLabel.setHorizontalAlignment (JLabel.CENTER);
+		c.add(inimigoLabel);
 		
 		for (int i = 0; i < 15; i++)
 		{
@@ -76,16 +99,19 @@ public class Jogo extends JFrame
 		JLabel label = new JLabel ();
 		label.setText ("Visão bloqueada, " + j1.getNome () + " deve clicar no botão para desbloquear sua visão");
 		
-		JButton terminei = new JButton ("Começar Jogo!");
-		terminei.addActionListener (new ActionListener () {
+		JButton comecar = new JButton ("Começar Jogo!");
+		comecar.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				
+				mapa1.setBloqueado (false);
+				mapa2.setBloqueado (false);
+				mapa1.marcaMapa(j1.getTabuleiroInimigo());
+				mapa2.marcaMapa(j1.getMeuTabuleiro());
 			}
 		});
 		
-		terminei.setBounds (390, 530, 100, 25);
-		terminei.setSize (terminei.getPreferredSize ());
-		terminei.setHorizontalAlignment (JButton.CENTER);
+		comecar.setBounds (390, 530, 100, 25);
+		comecar.setSize (comecar.getPreferredSize ());
+		comecar.setHorizontalAlignment (JButton.CENTER);
 
 		label.setBounds (200, 490, 400, 25);
 		label.setSize (label.getPreferredSize ());
@@ -93,7 +119,7 @@ public class Jogo extends JFrame
 		c.add (mapa1);
 		pack ();
 		c.add (mapa2);
-		c.add (terminei);
+		c.add (comecar);
 		c.add (label);
 
 		Toolkit tk = Toolkit.getDefaultToolkit ();
