@@ -50,7 +50,6 @@ public class TratadorMousePosicao implements MouseListener
 				}
 				else if (a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.Girando)
 				{
-					System.out.println ("teste d momento");
 					PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot (c);
 					frame.getMapa ().marcaMapa (jog.getMeuTabuleiro ());
 					a.getArma ().setEstadoPosicionamento (EstadoPosicionamento.Disponivel);

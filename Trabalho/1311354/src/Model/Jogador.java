@@ -78,12 +78,38 @@ public class Jogador implements ObservadoIF
 	public boolean posicionarArmaNoTabuleiro (int x, int y, Arma a, boolean girando)
 	{
 		int[][] pontosDaArma = a.getPontos ();
-		copiaTabuleiro (tabuleiroAux, meuTabuleiro);
 		
-		if (x + a.getLargura () - 1 > 14)
-			return false;
-		if (y - a.getAltura () < -1)
-			return false;
+		if (girando && a.getDirecao () == Direcao.Padrao)
+		{
+			if (y - a.getLargura () + 1 < 0)
+				return true;
+			if (x - a.getAltura () + 1 < 0)
+				return true;
+		}
+		else if (girando && a.getDirecao () == Direcao.NoventaGraus)
+		{
+			if (x - a.getLargura () + 1 < 0)
+				return true;
+			if (y + a.getAltura () - 1 > 14)
+				return true;
+		}
+		else if (girando && a.getDirecao () == Direcao.CentoEOitentaGraus)
+		{
+			if (y + a.getLargura () - 1 > 14)
+				return true;
+		}
+		else
+		{
+			if (x + a.getLargura () - 1 > 14)
+				return false;
+			if (y - a.getAltura () < -1)
+				return false;
+		}
+		
+		int[][] tabuleiroParcial = new int[15][15];
+		
+		copiaTabuleiro (tabuleiroParcial, tabuleiroAux);
+		copiaTabuleiro (tabuleiroAux, meuTabuleiro);
 		
 		for (int i = 0; i < 5; i++ )
 		{
@@ -116,8 +142,17 @@ public class Jogador implements ObservadoIF
 					
 					if (!testaPosicaoValida (posX, posY, a))
 					{
-						copiaTabuleiro (tabuleiroAux, meuTabuleiro);
-						return false;
+						if (!girando)
+						{
+							copiaTabuleiro (tabuleiroAux, meuTabuleiro);
+							return false;
+							
+						}
+						else
+						{
+							copiaTabuleiro (tabuleiroAux, tabuleiroParcial);
+							return true;
+						}
 					}
 					tabuleiroAux[posX][posY] = a.getTipoDeArma ().ordinal ();
 				}
