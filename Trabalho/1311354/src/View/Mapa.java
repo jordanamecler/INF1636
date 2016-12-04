@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class Mapa extends JPanel implements ObservadoIF
+public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int TXT_X = 300;
@@ -83,6 +83,9 @@ public class Mapa extends JPanel implements ObservadoIF
 						case 6:
 							g2d.setColor (CoresMapa.Destruida.getColor ());
 							break;	
+						case 7:
+							g2d.setColor (CoresMapa.VazioAtingido.getColor ());
+							
 					}
 				}
 				g2d.fill (rt);
@@ -154,5 +157,18 @@ public class Mapa extends JPanel implements ObservadoIF
 			// nao remove observer nesse caso
 		}
 		
+	}
+
+	@Override
+	public void update(String caso, Object obj) {
+		int[][] mapa = (int [][]) obj;
+		System.out.println("pintando mapa");
+		for (int[] i: mapa) {
+			for (int j: i) {
+				System.out.print(j);
+			}
+			System.out.println("");
+		}
+		this.marcaMapa(mapa);
 	}
 }

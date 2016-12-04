@@ -18,4 +18,5 @@ public class ViewFacade {
 	public static void inicializaJogo(ObservadorIF observador) {
 		new Jogo (observador);
 	}
+	
 }

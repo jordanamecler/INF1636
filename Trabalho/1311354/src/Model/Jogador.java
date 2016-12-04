@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -42,14 +43,41 @@ public class Jogador implements ObservadoIF
 		return tabuleiroAux;
 	}
 	
-	public void marcarMeuTabuleiro (int x, int y)
-	{
-		this.meuTabuleiro[x][y] = 1;
+	public boolean getConteudoMeuMapa(Point p) {
+		if (this.meuTabuleiro[p.x][p.y] != 0) {
+			return true;
+		}
+		return false;
 	}
 	
-	public void marcarTabuleiroInimigo (int x, int y)
+	public void marcarMeuTabuleiro (int x, int y)
 	{
-		this.tabuleiroInimigo[x][y] = 1;
+		if (this.meuTabuleiro[x][y] == 0) {
+			this.meuTabuleiro[x][y] = 7;
+		}
+		else if (this.meuTabuleiro[x][y] != 7 && this.meuTabuleiro[x][y] == 6)
+		{
+			this.meuTabuleiro[x][y] = 6;
+		}
+	}
+	
+	public boolean jaAtirouNaPosicao(int x, int y) 
+	{
+		if (this.tabuleiroInimigo[x][y] == 6 || this.tabuleiroInimigo[x][y] == 7) 
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public void marcarTabuleiroInimigo (int x, int y, boolean acertou)
+	{
+		if (acertou) {
+			this.tabuleiroInimigo[x][y] = 6;
+		}
+		else {
+			this.tabuleiroInimigo[x][y] = 7;
+		}
 	}
 	
 	public boolean posicionarArmaNoTabuleiro (int x, int y, Arma a, boolean girando)

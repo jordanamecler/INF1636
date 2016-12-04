@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Controller.JogoController;
 import Model.InformacoesGlobais;
 import Model.Jogador;
 import Model.JogoFacade;
@@ -109,6 +110,9 @@ public class Jogo extends JFrame
 				mapa1.marcaMapa(j1.getTabuleiroInimigo());
 				mapa2.marcaMapa(j1.getMeuTabuleiro());
 				mapa1.registerObserver(observador);
+				JogoController controller = (JogoController) observador;
+				controller.registerObserver(mapa1);
+			
 			}
 		});
 		
