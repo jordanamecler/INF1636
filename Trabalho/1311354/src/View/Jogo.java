@@ -17,12 +17,13 @@ import Model.JogoFacade;
 import Others.ObservadorIF;
 import Others.TratadorMouseJogo;
 
-public class Jogo extends JFrame
+public class Jogo extends JFrame implements ObservadorIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
-	JogoFacade facade = null;
+	private JogoFacade facade = null;
+	private JButton comecar;
 
 	public Jogo (ObservadorIF observador)
 	{
@@ -96,9 +97,10 @@ public class Jogo extends JFrame
 		JLabel label = new JLabel ();
 		label.setText ("Visão bloqueada, " + j1.getNome () + " deve clicar no botão para desbloquear sua visão");
 		
-		JButton comecar = new JButton ("Começar Jogo!");
+		comecar = new JButton ("Começar Jogo!");
 		comecar.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				comecar.setEnabled (false);
 				mapa1.setBloqueado (false);
 				mapa2.setBloqueado (false);
 				mapa1.marcaMapa (j1.getTabuleiroInimigo ());
@@ -106,7 +108,6 @@ public class Jogo extends JFrame
 				mapa1.registerObserver (observador);
 				JogoController controller = (JogoController) observador;
 				controller.registerObserver (mapa1);
-			
 			}
 		});
 		
@@ -133,5 +134,15 @@ public class Jogo extends JFrame
 		setBounds (x, y, LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		setVisible (true);
+	}
+	
+	public void update (String caso, Object obj)
+	{
+		switch (caso)
+		{
+			case "atacou_tres_vezes":
+				comecar.setEnabled (true);
+				break;
+		}
 	}
 }

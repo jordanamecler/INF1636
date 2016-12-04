@@ -200,8 +200,12 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 	@Override
 	public void update (String caso, Object obj)
 	{
-		if (((boolean) obj))
-			terminei.setEnabled (true);
+		switch (caso)
+		{
+			case "posicionou_todas_armas":
+				terminei.setEnabled (true);
+				break;
+		}
 	}
 
 	@Override

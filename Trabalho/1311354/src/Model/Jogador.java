@@ -17,6 +17,7 @@ public class Jogador implements ObservadoIF
 	private int[][] tabuleiroAux = new int[15][15];
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	private List <Arma> armas = new ArrayList <Arma> ();
+	private int numTiros = 3;
 	
 	public String getNome ()
 	{
@@ -234,6 +235,27 @@ public class Jogador implements ObservadoIF
 				//return;
 		
 		this.notifyObservers ("posicionou_todas_armas", null);
+	}
+	
+	public void decrementaTiros ()
+	{
+		numTiros--;
+	}
+	
+	public void setTiros ()
+	{
+		numTiros = 3;
+	}
+	
+	public int getNumTiros ()
+	{
+		return numTiros;
+	}
+	
+	public void atirouMaxVezes ()
+	{
+		if (numTiros <= 0)
+			notifyObservers ("atacou_tres_vezes", null);
 	}
 	
 	@Override
