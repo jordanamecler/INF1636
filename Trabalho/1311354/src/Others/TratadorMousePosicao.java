@@ -109,7 +109,7 @@ public class TratadorMousePosicao implements MouseListener
 			if (arma != null)
 			{
 				System.out.println ("Existe arma girando");
-				if (jog.posicionarArmaNoTabuleiro (arma.getPrimeiroPontoNoMapa ().x, arma.getPrimeiroPontoNoMapa ().x, arma, true))
+				if (jog.posicionarArmaNoTabuleiro (arma.getPrimeiroPontoNoMapa ().x, arma.getPrimeiroPontoNoMapa ().y, arma, true))
 				{
 					PosicionarNavios frame;
 					if (c instanceof PosicionarNavios)
