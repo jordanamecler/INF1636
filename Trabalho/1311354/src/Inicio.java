@@ -4,6 +4,6 @@ public class Inicio
 {
 	public static void main (String[] args)
 	{
-		JogoController controller = new JogoController();
+		new JogoController ();
 	}
 }

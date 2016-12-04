@@ -43,47 +43,41 @@ public class Jogador implements ObservadoIF
 		return tabuleiroAux;
 	}
 	
-	public boolean getConteudoMeuMapa(Point p) {
-		if (this.meuTabuleiro[p.x][p.y] != 0) {
+	public boolean getConteudoMeuMapa (Point p)
+	{
+		if (meuTabuleiro[p.x][p.y] != 0)
 			return true;
-		}
+		
 		return false;
 	}
 	
 	public void marcarMeuTabuleiro (int x, int y)
 	{
-		if (this.meuTabuleiro[x][y] == 0) {
-			this.meuTabuleiro[x][y] = 7;
-		}
-		else if (this.meuTabuleiro[x][y] != 7 && this.meuTabuleiro[x][y] == 6)
-		{
-			this.meuTabuleiro[x][y] = 6;
-		}
+		if (meuTabuleiro[x][y] == 0)
+			meuTabuleiro[x][y] = 7;
+		else if (meuTabuleiro[x][y] != 7 && meuTabuleiro[x][y] == 6)
+			meuTabuleiro[x][y] = 6;
 	}
 	
-	public boolean jaAtirouNaPosicao(int x, int y) 
+	public boolean jaAtirouNaPosicao (int x, int y) 
 	{
-		if (this.tabuleiroInimigo[x][y] == 6 || this.tabuleiroInimigo[x][y] == 7) 
-		{
+		if (tabuleiroInimigo[x][y] == 6 || tabuleiroInimigo[x][y] == 7) 
 			return true;
-		}
+		
 		return false;
 	}
 	
 	public void marcarTabuleiroInimigo (int x, int y, boolean acertou)
 	{
-		if (acertou) {
-			this.tabuleiroInimigo[x][y] = 6;
-		}
-		else {
-			this.tabuleiroInimigo[x][y] = 7;
-		}
+		if (acertou)
+			tabuleiroInimigo[x][y] = 6;
+		else
+			tabuleiroInimigo[x][y] = 7;
 	}
 	
 	public boolean posicionarArmaNoTabuleiro (int x, int y, Arma a, boolean girando)
 	{
 		int[][] pontosDaArma = a.getPontos ();
-
 		copiaTabuleiro (tabuleiroAux, meuTabuleiro);
 		
 		if (x + a.getLargura () - 1 > 14)
@@ -108,10 +102,14 @@ public class Jogador implements ObservadoIF
 								posY = y - i;
 								break;
 							case NoventaGraus:
+								posX = x - i;
+								posY = y - j + 1;
 								break;
 							case CentoEOitentaGraus:
+								posX = x - j + 1;
+								posY = y + i;
 								break;
-							case DuzentosESetentaGraus:
+							default:
 								break;
 						}
 					}
@@ -125,11 +123,13 @@ public class Jogador implements ObservadoIF
 				}
 			}
 		}
-		
+
 		for (Arma arma: armas)
 		{
 			if (arma == a)
 			{
+				if (girando)
+					arma.giraDirecao ();
 				arma.setPrimeiroPontoNoMapa (x, y);
 				return true;
 			}
@@ -216,13 +216,14 @@ public class Jogador implements ObservadoIF
     @Override
     public void notifyObservers (String mensagem, Object obj)
     {
-    	ListIterator<ObservadorIF> li = observers.listIterator();
+    	ListIterator <ObservadorIF> li = observers.listIterator ();
 		
-		while(li.hasNext()) {
-			ObservadorIF ob = (ObservadorIF) li.next();
+		while (li.hasNext ())
+		{
+			ObservadorIF ob = (ObservadorIF) li.next ();
 			System.out.println ("Notificando observers!");
 			ob.update (mensagem, true);
-			li.remove();
+			li.remove ();
 		}
     }
 }

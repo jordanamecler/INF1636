@@ -2,20 +2,21 @@ package View;
 
 import Others.ObservadorIF;
 
-public class ViewFacade {
+public class ViewFacade
+{
 
-	public static void iniciaTelaEscolherJogadores(ObservadorIF observador) 
+	public static void iniciaTelaEscolherJogadores (ObservadorIF observador) 
 	{
-		
-		new EscolherJogadores ().registerObserver(observador);;
+		new EscolherJogadores ().registerObserver (observador);
 	}
 	
-	public static void inicializaTelaPosicionarNavios(ObservadorIF observador,int numJogador) 
+	public static void inicializaTelaPosicionarNavios (ObservadorIF observador, int numJogador) 
 	{
-		new PosicionarNavios (numJogador).registerObserver(observador);;
+		new PosicionarNavios (numJogador).registerObserver (observador);
 	}
 	
-	public static void inicializaJogo(ObservadorIF observador) {
+	public static void inicializaJogo (ObservadorIF observador)
+	{
 		new Jogo (observador);
 	}
 	

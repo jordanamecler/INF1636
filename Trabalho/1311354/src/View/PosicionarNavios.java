@@ -15,10 +15,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Vector;
 
 public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoIF
 {
@@ -54,15 +52,13 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 			legendaX.setText (Integer.toString (i + 1));
 			legendaX.setBounds (500 + 20 * i, 100, 20, 25);
 			legendaX.setHorizontalAlignment (JLabel.CENTER);
-			c.add (legendaX);
-		}
-		
-		for (int i = 0; i < 15; i++)
-		{
+			
 			JLabel legendaY = new JLabel ();
 			legendaY.setText (Character.toString ((char) (i + 65)));
 			legendaY.setBounds (475, 125 + 20 * i, 20, 25);
 			legendaY.setHorizontalAlignment (JLabel.CENTER);
+			
+			c.add (legendaX);
 			c.add (legendaY);
 		}
 		
@@ -70,7 +66,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 		
 		// 1x couracado
 		Arma couracado = new Arma (TipoDeArma.Couracado);
-		jog.getListaArmas ().add(couracado);
+		jog.getListaArmas ().add (couracado);
 		
 		ArmaView cv = new ArmaView (couracado);
 		armasViews.add (cv);
@@ -140,12 +136,12 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 			public void actionPerformed (ActionEvent e) {
 				if (numJogador == 1)
 				{
-					notifyObservers("jogador1_posicionou_armas", null);
+					notifyObservers ("jogador1_posicionou_armas", null);
 					dispose ();
 				}
 				else
 				{
-					notifyObservers("jogador2_posicionou_armas", null);
+					notifyObservers ("jogador2_posicionou_armas", null);
 					dispose ();
 				}
 			}
@@ -221,15 +217,16 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 	}
 
 	@Override
-	public void notifyObservers(String mensagem, Object obj) 
+	public void notifyObservers (String mensagem, Object obj) 
 	{
-		ListIterator<ObservadorIF> li = observers.listIterator();
+		ListIterator <ObservadorIF> li = observers.listIterator ();
 		
-		while(li.hasNext()) {
-			ObservadorIF ob = (ObservadorIF) li.next();
+		while (li.hasNext ())
+		{
+			ObservadorIF ob = (ObservadorIF) li.next ();
 			System.out.println ("Notificando observers!");
 			ob.update (mensagem, null);
-			li.remove();
+			li.remove ();
 		}
 	}
 }

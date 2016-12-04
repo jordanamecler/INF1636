@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,21 +28,21 @@ public class Jogo extends JFrame
 	{
 		setTitle ("Batalha Naval");
 
-		Jogador j1 = InformacoesGlobais.getInformacoesGlobais().getJogador (1);
+		Jogador j1 = InformacoesGlobais.getInformacoesGlobais ().getJogador (1);
 		
 		Container c = getContentPane ();
 		c.setLayout (null);
 		
 		JLabel nomeJogadorLabel = new JLabel ();
-		nomeJogadorLabel.setText (j1.getNome());
+		nomeJogadorLabel.setText (j1.getNome ());
 		nomeJogadorLabel.setBounds (300, 40, 200,40);
 		nomeJogadorLabel.setHorizontalAlignment (JLabel.CENTER);
-		c.add(nomeJogadorLabel);
+		c.add (nomeJogadorLabel);
 		
 		Mapa mapa1 = new Mapa (100, 125);
-		mapa1.setName("mapa_inimigo");
+		mapa1.setName ("mapa_inimigo");
 		mapa1.setLayout (null);
-		mapa1.addMouseListener (new TratadorMouseJogo(mapa1));
+		mapa1.addMouseListener (new TratadorMouseJogo (mapa1));
 		
 		Mapa mapa2 = new Mapa (500, 125);
 		mapa2.setLayout (null);
@@ -59,13 +57,13 @@ public class Jogo extends JFrame
 		meuLabel.setText ("Meu mapa");
 		meuLabel.setBounds (540, 70,200,40);
 		meuLabel.setHorizontalAlignment (JLabel.CENTER);
-		c.add(meuLabel);
+		c.add (meuLabel);
 		
 		JLabel inimigoLabel = new JLabel ();
 		inimigoLabel.setText ("Mapa do inimigo");
 		inimigoLabel.setBounds (140, 70,200,40);
 		inimigoLabel.setHorizontalAlignment (JLabel.CENTER);
-		c.add(inimigoLabel);
+		c.add (inimigoLabel);
 		
 		for (int i = 0; i < 15; i++)
 		{
@@ -79,12 +77,6 @@ public class Jogo extends JFrame
 			legendaX2.setBounds (100 + 20 * i, 100, 20, 25);
 			legendaX2.setHorizontalAlignment (JLabel.CENTER);
 			
-			c.add (legendaX1);
-			c.add (legendaX2);
-		}
-		
-		for (int i = 0; i < 15; i++)
-		{
 			JLabel legendaY1 = new JLabel ();
 			legendaY1.setText (Character.toString ((char) (i + 65)));
 			legendaY1.setBounds (475, 125 + 20 * i, 20, 25);
@@ -95,8 +87,10 @@ public class Jogo extends JFrame
 			legendaY2.setBounds (75, 125 + 20 * i, 20, 25);
 			legendaY2.setHorizontalAlignment (JLabel.CENTER);
 			
-			c.add (legendaY2);
+			c.add (legendaX1);
+			c.add (legendaX2);
 			c.add (legendaY1);
+			c.add (legendaY2);
 		}
 
 		JLabel label = new JLabel ();
@@ -107,11 +101,11 @@ public class Jogo extends JFrame
 			public void actionPerformed (ActionEvent e) {
 				mapa1.setBloqueado (false);
 				mapa2.setBloqueado (false);
-				mapa1.marcaMapa(j1.getTabuleiroInimigo());
-				mapa2.marcaMapa(j1.getMeuTabuleiro());
-				mapa1.registerObserver(observador);
+				mapa1.marcaMapa (j1.getTabuleiroInimigo ());
+				mapa2.marcaMapa (j1.getMeuTabuleiro ());
+				mapa1.registerObserver (observador);
 				JogoController controller = (JogoController) observador;
-				controller.registerObserver(mapa1);
+				controller.registerObserver (mapa1);
 			
 			}
 		});

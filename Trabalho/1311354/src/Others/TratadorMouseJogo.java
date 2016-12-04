@@ -5,13 +5,9 @@ import java.awt.event.*;
 
 import javax.swing.SwingUtilities;
 
-import Model.Arma;
 import Model.InformacoesGlobais;
 import Model.Jogador;
-import Model.EstadoPosicionamento;
-import View.ArmaView;
 import View.Mapa;
-import View.PosicionarNavios;
 
 public class TratadorMouseJogo implements MouseListener
 {
@@ -36,14 +32,13 @@ public class TratadorMouseJogo implements MouseListener
 			if (c.getName ().contains ("mapa_inimigo"))
 			{	
 				Mapa mapa = (Mapa) c;
-				Point p = mapa.getPosicaoNoMapa(e.getX(), e.getY());
-				mapa.notifyObservers("mapa_clicado", p);
+				Point p = mapa.getPosicaoNoMapa (e.getX (), e.getY ());
+				mapa.notifyObservers ("mapa_clicado", p);
 			}
 			else
 			{	
 				
 			}
 		}
-		
 	}
 }

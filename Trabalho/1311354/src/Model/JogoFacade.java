@@ -19,35 +19,33 @@ public class JogoFacade
 			inf.setJogadorCorrente (inf.getJogador (1));
 	}
 	
-	public static boolean atirarNoMapa(Point ponto, Jogador jog) 
+	public static boolean atirarNoMapa (Point ponto, Jogador jog) 
 	{
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();		
 		boolean acertou = false;
 		
-		if (inf.getJogadorCorrente() == inf.getJogador(1)) {
-			if (inf.getJogador(1).jaAtirouNaPosicao(ponto.x, ponto.y) == false)
+		if (inf.getJogadorCorrente () == inf.getJogador (1))
+		{
+			if (inf.getJogador (1).jaAtirouNaPosicao (ponto.x, ponto.y) == false)
 			{
-				acertou = inf.getJogador(2).getConteudoMeuMapa(ponto);
-				inf.getJogador(2).marcarMeuTabuleiro(ponto.x, ponto.y);
+				acertou = inf.getJogador (2).getConteudoMeuMapa (ponto);
+				inf.getJogador (2).marcarMeuTabuleiro (ponto.x, ponto.y);
 			}
 			else
-			{
 				return false;
-			}
 			
 		}
-		else {
-			if (inf.getJogador(1).jaAtirouNaPosicao(ponto.x, ponto.y) == false)
+		else
+		{
+			if (inf.getJogador (1).jaAtirouNaPosicao (ponto.x, ponto.y) == false)
 			{
-				acertou = inf.getJogador(2).getConteudoMeuMapa(ponto);
-				inf.getJogador(2).marcarMeuTabuleiro(ponto.x, ponto.y);
+				acertou = inf.getJogador (2).getConteudoMeuMapa (ponto);
+				inf.getJogador (2).marcarMeuTabuleiro (ponto.x, ponto.y);
 			}
-			else {
+			else
 				return false;
-			}
-			
 		}
-		inf.getJogadorCorrente().marcarTabuleiroInimigo(ponto.x, ponto.y, acertou);
+		inf.getJogadorCorrente ().marcarTabuleiroInimigo (ponto.x, ponto.y, acertou);
 		return true;
 	}
 }

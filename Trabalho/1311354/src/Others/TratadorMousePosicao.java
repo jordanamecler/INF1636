@@ -43,17 +43,17 @@ public class TratadorMousePosicao implements MouseListener
 				if (jog.podeSelecionarArma () &&
 					a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.Disponivel &&
 					a.clicouNaArma (e.getX (), e.getY ())) {
-					a.getArma().setEstadoPosicionamento (EstadoPosicionamento.EmTransicao);
+					a.getArma ().setEstadoPosicionamento (EstadoPosicionamento.EmTransicao);
 				}
 				else if (a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.EmTransicao) {
-					a.getArma().setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
+						 a.getArma ().setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
 				}
 				else if (a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.Girando)
 				{
-					System.out.println("teste d momento");
+					System.out.println ("teste d momento");
 					PosicionarNavios frame = (PosicionarNavios) SwingUtilities.getRoot (c);
 					frame.getMapa ().marcaMapa (jog.getMeuTabuleiro ());
-					a.getArma().setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
+					a.getArma ().setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
 				}
 				
 				a.repaint ();

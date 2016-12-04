@@ -10,7 +10,6 @@ import java.awt.event.*;
 
 public class TratadorTeclado implements KeyListener
 {
-
     public void keyReleased (KeyEvent e)
     {
     	int keyCode = e.getKeyCode ();

@@ -2,8 +2,6 @@ package View;
 
 import javax.swing.*;
 
-import Model.InformacoesGlobais;
-import Model.Jogador;
 import Others.ObservadoIF;
 import Others.ObservadorIF;
 
@@ -41,7 +39,7 @@ public class EscolherJogadores extends JFrame implements ObservadoIF
 						JOptionPane.showMessageDialog (null, "Os dois jogadores devem ter nomes diferentes");
 					else
 					{							
-						notifyObservers("escolheu_jogadores", null);
+						notifyObservers ("escolheu_jogadores", null);
 						dispose ();
 					}
 				}
@@ -74,30 +72,31 @@ public class EscolherJogadores extends JFrame implements ObservadoIF
 	}
 
 	@Override
-	public void registerObserver(ObservadorIF observer)
+	public void registerObserver (ObservadorIF observer)
 	{
 		observers.add (observer);
 	}
 
 	@Override
-	public void removeObserver(ObservadorIF observer) 
+	public void removeObserver (ObservadorIF observer) 
 	{
 		observers.remove (observer);
 	}
 
 	@Override
-	public void notifyObservers(String mensagem, Object obj) 
+	public void notifyObservers (String mensagem, Object obj) 
 	{
-		ListIterator<ObservadorIF> li = observers.listIterator();
+		ListIterator <ObservadorIF> li = observers.listIterator ();
 		
-		while(li.hasNext()) {
-			ObservadorIF ob = (ObservadorIF) li.next();
+		while (li.hasNext ())
+		{
+			ObservadorIF ob = (ObservadorIF) li.next ();
 			System.out.println ("Notificando observers!");
-			Vector<String> vector = new Vector<String>(2);
-    		vector.addElement(this.jog1.getText());
-    		vector.addElement(this.jog2.getText());
+			Vector <String> vector = new Vector <String> (2);
+    		vector.addElement (this.jog1.getText ());
+    		vector.addElement (this.jog2.getText ());
 			ob.update (mensagem, vector);
-			li.remove();
+			li.remove ();
 		}
 	}
 }

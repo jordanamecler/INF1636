@@ -101,8 +101,9 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 		repaint ();
 	}
 	
-	public boolean getBloquado () {
-		return this.bloqueado;
+	public boolean getBloquado ()
+	{
+		return bloqueado;
 	}
 	
 	public Point getPosicaoNoMapa (Integer x, Integer y)
@@ -135,40 +136,43 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 	}
 
 	@Override
-	public void registerObserver(ObservadorIF observer) {
-        observers.add (observer);
-		
+	public void registerObserver (ObservadorIF observer)
+	{
+        observers.add (observer);	
 	}
 
 	@Override
-	public void removeObserver(ObservadorIF observer) {
-		observers.remove (observer);
-		
+	public void removeObserver (ObservadorIF observer)
+	{
+		observers.remove (observer);	
 	}
 
 	@Override
-	public void notifyObservers(String mensagem, Object obj) {
-		ListIterator<ObservadorIF> li = observers.listIterator();
+	public void notifyObservers (String mensagem, Object obj)
+	{
+		ListIterator <ObservadorIF> li = observers.listIterator ();
 		
-		while(li.hasNext()) {
-			ObservadorIF ob = (ObservadorIF) li.next();
+		while (li.hasNext ())
+		{
+			ObservadorIF ob = (ObservadorIF) li.next ();
 			System.out.println ("Notificando observers!");
 			ob.update (mensagem, obj);
 			// nao remove observer nesse caso
-		}
-		
+		}	
 	}
 
 	@Override
-	public void update(String caso, Object obj) {
+	public void update (String caso, Object obj)
+	{
 		int[][] mapa = (int [][]) obj;
-		System.out.println("pintando mapa");
-		for (int[] i: mapa) {
-			for (int j: i) {
-				System.out.print(j);
-			}
-			System.out.println("");
+		System.out.println ("pintando mapa");
+		for (int[] i: mapa)
+		{
+			for (int j: i)
+				System.out.print (j);
+			System.out.println ("");
 		}
-		this.marcaMapa(mapa);
+		
+		marcaMapa (mapa);
 	}
 }

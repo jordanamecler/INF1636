@@ -82,8 +82,6 @@ public class ArmaView extends JPanel
 		{
 			switch (arma.getTipoDeArma ())
 			{
-				case Vazio:
-					break;
 				case Couracado:
 					color = Color.orange;
 					break;
@@ -99,7 +97,7 @@ public class ArmaView extends JPanel
 				case Destroyer:
 					color = Color.black;
 					break;
-				case Destruida:
+				default:
 					break;
 			}
 		}
