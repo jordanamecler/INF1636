@@ -209,13 +209,13 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 	}
 
 	@Override
-	public void registerObserver(ObservadorIF observer)
+	public void registerObserver (ObservadorIF observer)
 	{
 		observers.add (observer);
 	}
 
 	@Override
-	public void removeObserver(ObservadorIF observer) 
+	public void removeObserver (ObservadorIF observer) 
 	{
 		observers.remove (observer);
 	}

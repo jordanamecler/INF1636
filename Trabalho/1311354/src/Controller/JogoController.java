@@ -49,6 +49,12 @@ public class JogoController implements ObservadorIF, ObservadoIF
 					Point p = (Point) obj;
 					System.out.println ("Ataque na posicao " + p);
 					boolean tiroValido = JogoFacade.atirarNoMapa (p, inf.getJogadorCorrente ());
+					if (tiroValido)
+					{
+						inf.getJogadorCorrente ().decrementaTiros ();
+						if (inf.getJogadorCorrente ().atirouMaxVezes ())
+							notifyObservers ("atirou_tres_vezes", null);
+					}
 					this.notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
 				}
 				break;
@@ -57,7 +63,7 @@ public class JogoController implements ObservadorIF, ObservadoIF
 	
 	private void escolheuJogadores (Object obj) 
 	{
-		Vector vector = (Vector) obj;
+		Vector <?> vector = (Vector <?>) obj;
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador j1 = inf.getJogador (1);
 		Jogador j2 = inf.getJogador (2);

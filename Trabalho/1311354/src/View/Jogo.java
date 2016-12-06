@@ -29,6 +29,9 @@ public class Jogo extends JFrame implements ObservadorIF
 	{
 		setTitle ("Batalha Naval");
 
+		JogoController controller = (JogoController) observador;
+		controller.registerObserver (this);
+		
 		Jogador j1 = InformacoesGlobais.getInformacoesGlobais ().getJogador (1);
 		
 		Container c = getContentPane ();
@@ -140,7 +143,7 @@ public class Jogo extends JFrame implements ObservadorIF
 	{
 		switch (caso)
 		{
-			case "atacou_tres_vezes":
+			case "atirou_tres_vezes":
 				comecar.setEnabled (true);
 				break;
 		}

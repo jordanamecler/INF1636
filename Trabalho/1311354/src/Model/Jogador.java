@@ -252,10 +252,11 @@ public class Jogador implements ObservadoIF
 		return numTiros;
 	}
 	
-	public void atirouMaxVezes ()
+	public boolean atirouMaxVezes ()
 	{
 		if (numTiros <= 0)
-			notifyObservers ("atacou_tres_vezes", null);
+			return true;
+		return false;
 	}
 	
 	@Override

@@ -164,15 +164,20 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 	@Override
 	public void update (String caso, Object obj)
 	{
-		int[][] mapa = (int [][]) obj;
-		System.out.println ("pintando mapa");
-		for (int[] i: mapa)
+		switch (caso)
 		{
-			for (int j: i)
-				System.out.print (j);
-			System.out.println ("");
+			case "marcar_mapa":
+				int[][] mapa = (int [][]) obj;
+				System.out.println ("pintando mapa");
+				for (int[] i: mapa)
+				{
+					for (int j: i)
+						System.out.print (j);
+					System.out.println ("");
+				}
+				
+				marcaMapa (mapa);
+				break;
 		}
-		
-		marcaMapa (mapa);
 	}
 }

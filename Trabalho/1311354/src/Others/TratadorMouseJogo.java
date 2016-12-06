@@ -27,7 +27,7 @@ public class TratadorMouseJogo implements MouseListener
 	{
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog = inf.getJogadorCorrente ();
-		if (SwingUtilities.isLeftMouseButton (e))
+		if (jog.getNumTiros () > 0 && SwingUtilities.isLeftMouseButton (e))
 		{			
 			if (c.getName ().contains ("mapa_inimigo"))
 			{	
