@@ -37,10 +37,10 @@ public class JogoFacade
 		}
 		else
 		{
-			if (inf.getJogador (1).jaAtirouNaPosicao (ponto.x, ponto.y) == false)
+			if (inf.getJogador (2).jaAtirouNaPosicao (ponto.x, ponto.y) == false)
 			{
-				acertou = inf.getJogador (2).getConteudoMeuMapa (ponto);
-				inf.getJogador (2).marcarMeuTabuleiro (ponto.x, ponto.y);
+				acertou = inf.getJogador (1).getConteudoMeuMapa (ponto);
+				inf.getJogador (1).marcarMeuTabuleiro (ponto.x, ponto.y);
 			}
 			else
 				return false;

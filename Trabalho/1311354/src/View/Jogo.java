@@ -33,6 +33,8 @@ public class Jogo extends JFrame implements ObservadorIF
 		controller.registerObserver (this);
 		
 		Jogador j1 = InformacoesGlobais.getInformacoesGlobais ().getJogador (1);
+		Jogador j2 = InformacoesGlobais.getInformacoesGlobais ().getJogador (2);
+		InformacoesGlobais.getInformacoesGlobais ().setJogadorCorrente (j1);
 		
 		Container c = getContentPane ();
 		c.setLayout (null);
@@ -103,14 +105,26 @@ public class Jogo extends JFrame implements ObservadorIF
 		comecar = new JButton ("Começar Jogo!");
 		comecar.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				if (comecar.getText () == "Trocar jogador")
+				{
+					InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().setTiros ();
+					if (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente () == j1)
+						InformacoesGlobais.getInformacoesGlobais ().setJogadorCorrente (j2);
+					else
+						InformacoesGlobais.getInformacoesGlobais ().setJogadorCorrente (j1);
+				}
+				nomeJogadorLabel.setText (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().getNome ());
+				comecar.setText ("Trocar jogador");
 				comecar.setEnabled (false);
 				mapa1.setBloqueado (false);
 				mapa2.setBloqueado (false);
-				mapa1.marcaMapa (j1.getTabuleiroInimigo ());
-				mapa2.marcaMapa (j1.getMeuTabuleiro ());
+				mapa1.marcaMapa (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().getTabuleiroInimigo ());
+				mapa2.marcaMapa (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().getMeuTabuleiro ());
 				mapa1.registerObserver (observador);
 				JogoController controller = (JogoController) observador;
 				controller.registerObserver (mapa1);
+				
+				repaint ();
 			}
 		});
 		
