@@ -30,6 +30,9 @@ public class JogoFacade
 			{
 				acertou = inf.getJogador (2).getConteudoMeuMapa (ponto);
 				inf.getJogador (2).marcarMeuTabuleiro (ponto.x, ponto.y);
+				
+				if (inf.getJogador (2).acabaramArmas ())
+					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
 			}
 			else
 				return false;
@@ -41,10 +44,14 @@ public class JogoFacade
 			{
 				acertou = inf.getJogador (1).getConteudoMeuMapa (ponto);
 				inf.getJogador (1).marcarMeuTabuleiro (ponto.x, ponto.y);
+				
+				if (inf.getJogador (1).acabaramArmas ())
+					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
 			}
 			else
 				return false;
 		}
+		
 		inf.getJogadorCorrente ().marcarTabuleiroInimigo (ponto.x, ponto.y, acertou);
 		return true;
 	}

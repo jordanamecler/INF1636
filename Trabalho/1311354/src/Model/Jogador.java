@@ -56,7 +56,7 @@ public class Jogador implements ObservadoIF
 	{
 		if (meuTabuleiro[x][y] == 0)
 			meuTabuleiro[x][y] = 7;
-		else if (meuTabuleiro[x][y] != 7 && meuTabuleiro[x][y] == 6)
+		else if (meuTabuleiro[x][y] != 7)// && meuTabuleiro[x][y] == 6)
 			meuTabuleiro[x][y] = 6;
 	}
 	
@@ -257,6 +257,20 @@ public class Jogador implements ObservadoIF
 		if (numTiros <= 0)
 			return true;
 		return false;
+	}
+	
+	public boolean acabaramArmas ()
+	{
+		for (int i=0; i< meuTabuleiro.length; i++)
+		{
+			  for (int j=0; j< meuTabuleiro[i].length; j++)
+			  {
+				  if (meuTabuleiro[i][i] != 0 && meuTabuleiro[i][j] != 6 && meuTabuleiro[i][j] != 7)
+					  return false;
+			  }
+		}
+		
+		return true;
 	}
 	
 	@Override
