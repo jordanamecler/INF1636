@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import Controller.JogoController;
 import Model.InformacoesGlobais;
@@ -161,6 +162,7 @@ public class Jogo extends JFrame implements ObservadorIF
 				comecar.setEnabled (true);
 				break;
 			case "jogador_ganhou":
+				JOptionPane.showMessageDialog (null, (String) obj + " venceu a partida!");
 				dispose ();
 		}
 	}

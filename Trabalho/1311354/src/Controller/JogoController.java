@@ -54,19 +54,20 @@ public class JogoController implements ObservadorIF, ObservadoIF
 					Point p = (Point) obj;
 					System.out.println ("Ataque na posicao " + p);
 					boolean tiroValido = JogoFacade.atirarNoMapa (p, inf.getJogadorCorrente ());
+					
+					notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
+					
 					if (tiroValido)
 					{
 						if (inf.existeVencedor ())
 						{
-							notifyObservers ("jogador_ganhou", null);
-							ViewFacade.inicializaTelaVencedor (inf.getJogadorCorrente ().getNome (), inf.getJogadorCorrente ().getMeuTabuleiro (), inf.getJogadorCorrente ().getTabuleiroInimigo ());
+							notifyObservers ("jogador_ganhou", inf.getJogadorCorrente ().getNome ());
 							break;
 						}
 						inf.getJogadorCorrente ().decrementaTiros ();
 						if (inf.getJogadorCorrente ().atirouMaxVezes ())
 							notifyObservers ("atirou_tres_vezes", null);
 					}
-					notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
 				}
 				break;
 		}

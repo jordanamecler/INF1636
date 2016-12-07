@@ -4,7 +4,6 @@ import Others.ObservadorIF;
 
 public class ViewFacade
 {
-
 	public static void iniciaTelaEscolherJogadores (ObservadorIF observador) 
 	{
 		new EscolherJogadores ().registerObserver (observador);
@@ -19,10 +18,4 @@ public class ViewFacade
 	{
 		new Jogo (observador);
 	}
-	
-	public static void inicializaTelaVencedor (String nomeVencedor, int[][] meuTabuleiro, int[][] tabuleiroInimigo)
-	{
-		new Vencedor (nomeVencedor, meuTabuleiro, tabuleiroInimigo);
-	}
-	
 }
