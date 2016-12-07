@@ -16,7 +16,7 @@ public class Vencedor extends JFrame // implements ObservadoIF
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
 	
-	public Vencedor (String nomeVencedor, int[][] tabuleiro)
+	public Vencedor (String nomeVencedor, int[][] meuTabuleiro, int[][] tabuleiroInimigo)
 	{
 		setTitle ("Batalha Naval");
 		
@@ -29,15 +29,20 @@ public class Vencedor extends JFrame // implements ObservadoIF
 		nomeVencedorLabel.setHorizontalAlignment (JLabel.CENTER);
 		c.add (nomeVencedorLabel);
 		
-		Mapa mapa1 = new Mapa (100, 125);
+		Mapa mapa1 = new Mapa (500, 125);
 		mapa1.setLayout (null);
-		mapa1.setName ("meu_mapa");
-		mapa1.marcaMapa (tabuleiro);
+		mapa1.marcaMapa (tabuleiroInimigo);
 		mapa1.setSize (300, 300);
 		c.add (mapa1);
 		pack ();
 		
-		
+		Mapa mapa2 = new Mapa (100, 125);
+		mapa2.setLayout (null);
+		mapa2.marcaMapa (meuTabuleiro);
+		mapa2.setSize (300, 300);
+		c.add (mapa2);
+		pack ();
+
 		Toolkit tk = Toolkit.getDefaultToolkit ();
 		Dimension screenSize = tk.getScreenSize ();
 		int sl = screenSize.width;

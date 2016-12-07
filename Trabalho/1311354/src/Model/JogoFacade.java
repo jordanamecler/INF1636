@@ -33,7 +33,7 @@ public class JogoFacade
 				
 				if (inf.getJogador (2).acabaramArmas ())
 				{
-					inf.setJogadorVencedor (inf.getJogadorCorrente ());
+					inf.setExisteVencedor ();
 					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
 				}
 			}
@@ -50,7 +50,7 @@ public class JogoFacade
 				
 				if (inf.getJogador (1).acabaramArmas ())
 				{
-					inf.setJogadorVencedor (inf.getJogadorCorrente ());
+					inf.setExisteVencedor ();
 					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
 				}
 			}

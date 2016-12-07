@@ -59,7 +59,7 @@ public class JogoController implements ObservadorIF, ObservadoIF
 						if (inf.existeVencedor ())
 						{
 							notifyObservers ("jogador_ganhou", null);
-							ViewFacade.inicializaTelaVencedor (inf.getJogadorVencedor ().getNome (), inf.getJogadorCorrente ().getMeuTabuleiro ());
+							ViewFacade.inicializaTelaVencedor (inf.getJogadorCorrente ().getNome (), inf.getJogadorCorrente ().getMeuTabuleiro (), inf.getJogadorCorrente ().getTabuleiroInimigo ());
 							break;
 						}
 						inf.getJogadorCorrente ().decrementaTiros ();

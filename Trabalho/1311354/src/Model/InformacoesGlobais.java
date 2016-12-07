@@ -39,15 +39,9 @@ public class InformacoesGlobais
 		jogadorCorrente = jog;
 	}
 	
-	public Jogador getJogadorVencedor ()
-	{
-		return vencedor;
-	}
-	
-	public void setJogadorVencedor (Jogador jog)
+	public void setExisteVencedor ()
 	{
 		existeVencedor = true;
-		vencedor = jog;
 	}
 	
 	public boolean existeVencedor ()

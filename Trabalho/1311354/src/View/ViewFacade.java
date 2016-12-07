@@ -20,9 +20,9 @@ public class ViewFacade
 		new Jogo (observador);
 	}
 	
-	public static void inicializaTelaVencedor (String nomeVencedor, int[][] tabuleiro)
+	public static void inicializaTelaVencedor (String nomeVencedor, int[][] meuTabuleiro, int[][] tabuleiroInimigo)
 	{
-		new Vencedor (nomeVencedor, tabuleiro);
+		new Vencedor (nomeVencedor, meuTabuleiro, tabuleiroInimigo);
 	}
 	
 }
