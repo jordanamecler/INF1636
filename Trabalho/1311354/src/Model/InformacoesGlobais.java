@@ -6,6 +6,8 @@ public class InformacoesGlobais
 	private Jogador jogador1 = new Jogador ();
 	private Jogador jogador2 = new Jogador ();
 	private Jogador jogadorCorrente;
+	private Jogador vencedor;
+	private boolean existeVencedor = false;
 	
 	private InformacoesGlobais ()
 	{
@@ -35,5 +37,21 @@ public class InformacoesGlobais
 	public void setJogadorCorrente (Jogador jog)
 	{
 		jogadorCorrente = jog;
+	}
+	
+	public Jogador getJogadorVencedor ()
+	{
+		return vencedor;
+	}
+	
+	public void setJogadorVencedor (Jogador jog)
+	{
+		existeVencedor = true;
+		vencedor = jog;
+	}
+	
+	public boolean existeVencedor ()
+	{
+		return existeVencedor;
 	}
 }

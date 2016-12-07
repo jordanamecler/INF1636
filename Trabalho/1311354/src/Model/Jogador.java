@@ -265,7 +265,7 @@ public class Jogador implements ObservadoIF
 		{
 			  for (int j=0; j< meuTabuleiro[i].length; j++)
 			  {
-				  if (meuTabuleiro[i][i] != 0 && meuTabuleiro[i][j] != 6 && meuTabuleiro[i][j] != 7)
+				  if (meuTabuleiro[i][j] != 0 && meuTabuleiro[i][j] != 6 && meuTabuleiro[i][j] != 7)
 					  return false;
 			  }
 		}

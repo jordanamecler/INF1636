@@ -15,7 +15,7 @@ import Others.ObservadorIF;
 
 public class JogoController implements ObservadorIF, ObservadoIF
 {
-	boolean jogoComecou = false;
+	private boolean jogoComecou = false;
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	
 	public JogoController () 
@@ -28,15 +28,20 @@ public class JogoController implements ObservadorIF, ObservadoIF
 	{
 		System.out.println (obj);
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
+		Jogador jog;
 		
 		switch (caso)
 		{
 			case "escolheu_jogadores":
 				escolheuJogadores (obj);
-				ViewFacade.inicializaTelaPosicionarNavios (this, 1);
+				jog = inf.getJogador (1);
+				inf.setJogadorCorrente (jog);
+				ViewFacade.inicializaTelaPosicionarNavios (this, 1, jog.getNome ());
 				break;
 			case "jogador1_posicionou_armas":
-				ViewFacade.inicializaTelaPosicionarNavios (this, 2);
+				jog = inf.getJogador (2);
+				inf.setJogadorCorrente (jog);
+				ViewFacade.inicializaTelaPosicionarNavios (this, 2, jog.getNome ());
 				break;
 			case "jogador2_posicionou_armas":
 				inf.setJogadorCorrente (inf.getJogador (1));
@@ -44,18 +49,24 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				jogoComecou = true;
 				break;
 			case "mapa_clicado":
-				if (this.jogoComecou) 
+				if (jogoComecou) 
 				{
 					Point p = (Point) obj;
 					System.out.println ("Ataque na posicao " + p);
 					boolean tiroValido = JogoFacade.atirarNoMapa (p, inf.getJogadorCorrente ());
 					if (tiroValido)
 					{
+						if (inf.existeVencedor ())
+						{
+							notifyObservers ("jogador_ganhou", null);
+							ViewFacade.inicializaTelaVencedor (inf.getJogadorVencedor ().getNome (), inf.getJogadorCorrente ().getMeuTabuleiro ());
+							break;
+						}
 						inf.getJogadorCorrente ().decrementaTiros ();
 						if (inf.getJogadorCorrente ().atirouMaxVezes ())
 							notifyObservers ("atirou_tres_vezes", null);
 					}
-					this.notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
+					notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
 				}
 				break;
 		}

@@ -28,7 +28,7 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 	private List <ArmaView> armasViews = new ArrayList <ArmaView> ();
 	
-	public PosicionarNavios (int numJogador)
+	public PosicionarNavios (int numJogador, String nomeJogador)
 	{
 		setTitle ("Batalha Naval");
 		Container c = getContentPane ();
@@ -38,10 +38,10 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog = inf.getJogador (numJogador);
-		inf.setJogadorCorrente (jog);
+//		inf.setJogadorCorrente (jog);
 		
 		JLabel label = new JLabel ();
-		label.setText (jog.getNome ());
+		label.setText (nomeJogador);
 		
 		// Mapa para escolher as posicoes das armas
 		mapa = new Mapa ();

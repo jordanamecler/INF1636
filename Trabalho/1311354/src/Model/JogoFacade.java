@@ -32,7 +32,10 @@ public class JogoFacade
 				inf.getJogador (2).marcarMeuTabuleiro (ponto.x, ponto.y);
 				
 				if (inf.getJogador (2).acabaramArmas ())
+				{
+					inf.setJogadorVencedor (inf.getJogadorCorrente ());
 					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
+				}
 			}
 			else
 				return false;
@@ -46,7 +49,10 @@ public class JogoFacade
 				inf.getJogador (1).marcarMeuTabuleiro (ponto.x, ponto.y);
 				
 				if (inf.getJogador (1).acabaramArmas ())
+				{
+					inf.setJogadorVencedor (inf.getJogadorCorrente ());
 					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
+				}
 			}
 			else
 				return false;

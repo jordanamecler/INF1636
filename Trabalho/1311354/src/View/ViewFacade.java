@@ -10,14 +10,19 @@ public class ViewFacade
 		new EscolherJogadores ().registerObserver (observador);
 	}
 	
-	public static void inicializaTelaPosicionarNavios (ObservadorIF observador, int numJogador) 
+	public static void inicializaTelaPosicionarNavios (ObservadorIF observador, int numJogador, String nomeJogador) 
 	{
-		new PosicionarNavios (numJogador).registerObserver (observador);
+		new PosicionarNavios (numJogador, nomeJogador).registerObserver (observador);
 	}
 	
 	public static void inicializaJogo (ObservadorIF observador)
 	{
 		new Jogo (observador);
+	}
+	
+	public static void inicializaTelaVencedor (String nomeVencedor, int[][] tabuleiro)
+	{
+		new Vencedor (nomeVencedor, tabuleiro);
 	}
 	
 }

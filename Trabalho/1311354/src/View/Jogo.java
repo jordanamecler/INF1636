@@ -160,6 +160,8 @@ public class Jogo extends JFrame implements ObservadorIF
 			case "atirou_tres_vezes":
 				comecar.setEnabled (true);
 				break;
+			case "jogador_ganhou":
+				dispose ();
 		}
 	}
 }
