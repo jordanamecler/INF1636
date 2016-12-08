@@ -9,7 +9,6 @@ import java.util.Vector;
 import View.ViewFacade;
 import Model.InformacoesGlobais;
 import Model.Jogador;
-import Model.JogoFacade;
 import Others.ObservadoIF;
 import Others.ObservadorIF;
 
@@ -53,7 +52,7 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				{
 					Point p = (Point) obj;
 					System.out.println ("Ataque na posicao " + p);
-					boolean tiroValido = JogoFacade.atirarNoMapa (p, inf.getJogadorCorrente ());
+					boolean tiroValido = atirarNoMapa (p, inf.getJogadorCorrente ());
 					
 					notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
 					
@@ -91,6 +90,49 @@ public class JogoController implements ObservadorIF, ObservadoIF
 		j2.setNome ((String) vector.get (1));
 	}
 
+	public static boolean atirarNoMapa (Point ponto, Jogador jog) 
+	{
+		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();		
+		boolean acertou = false;
+		
+		if (inf.getJogadorCorrente () == inf.getJogador (1))
+		{
+			if (inf.getJogador (1).jaAtirouNaPosicao (ponto.x, ponto.y) == false)
+			{
+				acertou = inf.getJogador (2).getConteudoMeuMapa (ponto);
+				inf.getJogador (2).marcarMeuTabuleiro (ponto.x, ponto.y);
+				
+				if (inf.getJogador (2).acabaramArmas ())
+				{
+					inf.setExisteVencedor ();
+					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
+				}
+			}
+			else
+				return false;
+			
+		}
+		else
+		{
+			if (inf.getJogador (2).jaAtirouNaPosicao (ponto.x, ponto.y) == false)
+			{
+				acertou = inf.getJogador (1).getConteudoMeuMapa (ponto);
+				inf.getJogador (1).marcarMeuTabuleiro (ponto.x, ponto.y);
+				
+				if (inf.getJogador (1).acabaramArmas ())
+				{
+					inf.setExisteVencedor ();
+					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
+				}
+			}
+			else
+				return false;
+		}
+		
+		inf.getJogadorCorrente ().marcarTabuleiroInimigo (ponto.x, ponto.y, acertou);
+		return true;
+	}
+	
 	@Override
 	public void registerObserver (ObservadorIF observer)
 	{
