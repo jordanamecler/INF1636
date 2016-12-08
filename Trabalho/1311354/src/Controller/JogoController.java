@@ -45,7 +45,7 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				break;
 			case "jogador2_posicionou_armas":
 				inf.setJogadorCorrente (inf.getJogador (1));
-				ViewFacade.inicializaJogo (this);
+				ViewFacade.inicializaJogo (this, inf.getJogador (1).getNome (), inf.getJogador (1).getMeuTabuleiro (), inf.getJogador (1).getTabuleiroInimigo ());
 				jogoComecou = true;
 				break;
 			case "mapa_clicado":
@@ -69,6 +69,14 @@ public class JogoController implements ObservadorIF, ObservadoIF
 							notifyObservers ("atirou_tres_vezes", null);
 					}
 				}
+				break;
+			case "trocou_jogador":
+				inf.getJogadorCorrente ().setTiros ();
+				if (inf.getJogadorCorrente () == inf.getJogador (1))
+					inf.setJogadorCorrente (inf.getJogador (2));
+				else
+					inf.setJogadorCorrente (inf.getJogador (1));
+				notifyObservers ("troca_de_jogador", new Object [] {inf.getJogadorCorrente ().getNome (), inf.getJogadorCorrente ().getMeuTabuleiro (), inf.getJogadorCorrente ().getTabuleiroInimigo ()});
 				break;
 		}
 	}

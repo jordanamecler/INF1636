@@ -38,7 +38,6 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog = inf.getJogador (numJogador);
-//		inf.setJogadorCorrente (jog);
 		
 		JLabel label = new JLabel ();
 		label.setText (nomeJogador);

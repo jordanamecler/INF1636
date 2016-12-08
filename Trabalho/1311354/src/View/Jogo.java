@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,36 +15,36 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import Controller.JogoController;
-import Model.InformacoesGlobais;
-import Model.Jogador;
-import Model.JogoFacade;
+import Others.ObservadoIF;
 import Others.ObservadorIF;
 import Others.TratadorMouseJogo;
 
-public class Jogo extends JFrame implements ObservadorIF
+public class Jogo extends JFrame implements ObservadorIF, ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
 	private final int ALT_DEFAULT = 600;
-	private JogoFacade facade = null;
 	private JButton comecar;
+	JLabel nomeJogadorLabel;
+	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
+	private int[][] meuTabuleiro;
+	private int[][] tabuleiroInimigo;
 
-	public Jogo (ObservadorIF observador)
+	public Jogo (ObservadorIF observador, String nome, int[][] tab, int[][] tabInimigo)
 	{
 		setTitle ("Batalha Naval");
-
-		JogoController controller = (JogoController) observador;
-		controller.registerObserver (this);
-		
-		Jogador j1 = InformacoesGlobais.getInformacoesGlobais ().getJogador (1);
-		Jogador j2 = InformacoesGlobais.getInformacoesGlobais ().getJogador (2);
-		InformacoesGlobais.getInformacoesGlobais ().setJogadorCorrente (j1);
 		
 		Container c = getContentPane ();
 		c.setLayout (null);
 		
-		JLabel nomeJogadorLabel = new JLabel ();
-		nomeJogadorLabel.setText (j1.getNome ());
+		JogoController controller = (JogoController) observador;
+		controller.registerObserver (this);
+		
+		meuTabuleiro = tab;
+		tabuleiroInimigo = tabInimigo;
+		
+		nomeJogadorLabel = new JLabel ();
+		nomeJogadorLabel.setText (nome);
 		nomeJogadorLabel.setBounds (300, 40, 200,40);
 		nomeJogadorLabel.setHorizontalAlignment (JLabel.CENTER);
 		c.add (nomeJogadorLabel);
@@ -101,26 +104,20 @@ public class Jogo extends JFrame implements ObservadorIF
 		}
 
 		JLabel label = new JLabel ();
-		label.setText ("Visão bloqueada, " + j1.getNome () + " deve clicar no botão para desbloquear sua visão");
+		label.setText ("Visão bloqueada, " + nome + " deve clicar no botão para desbloquear sua visão");
 		
 		comecar = new JButton ("Começar Jogo!");
 		comecar.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				if (comecar.getText () == "Trocar jogador")
-				{
-					InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().setTiros ();
-					if (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente () == j1)
-						InformacoesGlobais.getInformacoesGlobais ().setJogadorCorrente (j2);
-					else
-						InformacoesGlobais.getInformacoesGlobais ().setJogadorCorrente (j1);
-				}
-				nomeJogadorLabel.setText (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().getNome ());
+					notifyObservers ("trocou_jogador", null);
+				
 				comecar.setText ("Trocar jogador");
 				comecar.setEnabled (false);
 				mapa1.setBloqueado (false);
 				mapa2.setBloqueado (false);
-				mapa1.marcaMapa (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().getTabuleiroInimigo ());
-				mapa2.marcaMapa (InformacoesGlobais.getInformacoesGlobais ().getJogadorCorrente ().getMeuTabuleiro ());
+				mapa1.marcaMapa (tabuleiroInimigo);
+				mapa2.marcaMapa (meuTabuleiro);
 				mapa1.registerObserver (observador);
 				JogoController controller = (JogoController) observador;
 				controller.registerObserver (mapa1);
@@ -158,6 +155,11 @@ public class Jogo extends JFrame implements ObservadorIF
 	{
 		switch (caso)
 		{
+			case "troca_de_jogador":
+				nomeJogadorLabel.setText ((String) ((Object[]) obj)[0]);
+				meuTabuleiro = (int[][]) ((Object[]) obj)[1];
+				tabuleiroInimigo = (int[][]) ((Object[]) obj)[2];
+				break;
 			case "atirou_tres_vezes":
 				comecar.setEnabled (true);
 				break;
@@ -166,4 +168,27 @@ public class Jogo extends JFrame implements ObservadorIF
 				dispose ();
 		}
 	}
+	
+	public void registerObserver (ObservadorIF observer)
+	{
+		observers.add (observer);
+	}
+	
+    public void removeObserver (ObservadorIF observer)
+    {
+    	observers.remove (observer);
+    }
+    
+    public void notifyObservers (String mensagem, Object obj)
+    {
+    	ListIterator <ObservadorIF> li = observers.listIterator ();
+		
+		while (li.hasNext ())
+		{
+			ObservadorIF ob = (ObservadorIF) li.next ();
+			System.out.println ("Notificando observers!");
+			ob.update (mensagem, null);
+			//nao remove
+		}
+    }
 }
