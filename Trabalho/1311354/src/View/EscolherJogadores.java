@@ -91,7 +91,6 @@ public class EscolherJogadores extends JFrame implements ObservadoIF
 		while (li.hasNext ())
 		{
 			ObservadorIF ob = (ObservadorIF) li.next ();
-			System.out.println ("Notificando observers!");
 			Vector <String> vector = new Vector <String> (2);
     		vector.addElement (this.jog1.getText ());
     		vector.addElement (this.jog2.getText ());

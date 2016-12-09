@@ -227,7 +227,6 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 		while (li.hasNext ())
 		{
 			ObservadorIF ob = (ObservadorIF) li.next ();
-			System.out.println ("Notificando observers!");
 			ob.update (mensagem, null);
 			li.remove ();
 		}

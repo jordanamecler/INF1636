@@ -25,7 +25,6 @@ public class JogoController implements ObservadorIF, ObservadoIF
 	@Override
 	public void update (String caso, Object obj) 
 	{
-		System.out.println (obj);
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
 		Jogador jog;
 		
@@ -51,7 +50,6 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				if (jogoComecou) 
 				{
 					Point p = (Point) obj;
-					System.out.println ("Ataque na posicao " + p);
 					boolean tiroValido = atirarNoMapa (p, inf.getJogadorCorrente ());
 					
 					notifyObservers ("marcar_mapa", inf.getJogadorCorrente ().getTabuleiroInimigo ());
@@ -105,7 +103,6 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				if (inf.getJogador (2).acabaramArmas ())
 				{
 					inf.setExisteVencedor ();
-					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
 				}
 			}
 			else
@@ -122,7 +119,6 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				if (inf.getJogador (1).acabaramArmas ())
 				{
 					inf.setExisteVencedor ();
-					System.out.println ("Jogador " + inf.getJogadorCorrente ().getNome () + " venceu!");
 				}
 			}
 			else
@@ -149,7 +145,6 @@ public class JogoController implements ObservadorIF, ObservadoIF
 	public void notifyObservers (String mensagem, Object obj)
 	{
 		ListIterator <ObservadorIF> li = observers.listIterator ();
-		System.out.println ("notifica acerto ");
 		while (li.hasNext ())
 		{
 			ObservadorIF ob = (ObservadorIF) li.next ();

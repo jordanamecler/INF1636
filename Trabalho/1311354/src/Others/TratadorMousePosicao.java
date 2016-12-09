@@ -36,10 +36,8 @@ public class TratadorMousePosicao implements MouseListener
 			// escolheu alguma arma
 			if (c.getName () == "cv" || c.getName ().contains ("sv") || c.getName ().contains ("dv") || c.getName ().contains ("crv") || c.getName ().contains ("hv"))
 			{
-				System.out.println (c.getName ());
-				ArmaView a = (ArmaView) c;
-				System.out.println (jog.getNome ());
 				
+				ArmaView a = (ArmaView) c;				
 				if (jog.podeSelecionarArma () &&
 					a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.Disponivel &&
 					a.clicouNaArma (e.getX (), e.getY ())) {
@@ -71,7 +69,6 @@ public class TratadorMousePosicao implements MouseListener
 					Mapa m = (Mapa) c;
 					Point p = m.getPosicaoNoMapa (e.getX (), e.getY ());
 					boolean conseguiuPosicionar = jog.posicionarArmaNoTabuleiro (p.x, p.y, armaSelecionada, false);
-					System.out.println ("Conseguiu posicionar arma: " + conseguiuPosicionar);
 					if (conseguiuPosicionar)
 					{
 						m.marcaMapa (jog.getTabuleiroAux ());
@@ -84,7 +81,6 @@ public class TratadorMousePosicao implements MouseListener
 				Arma arma = jog.getArmaEmEstado (EstadoPosicionamento.EmTransicao);
 				if (arma != null)
 				{
-					System.out.println ("Achou arma em transicao");
 					arma.setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
 					PosicionarNavios frame = (PosicionarNavios) c;
 					frame.getMapa ().marcaMapa (jog.getMeuTabuleiro ());
@@ -93,7 +89,6 @@ public class TratadorMousePosicao implements MouseListener
 				arma = jog.getArmaEmEstado (EstadoPosicionamento.Girando);
 				if (arma != null)
 				{
-					System.out.println ("Achou arma girando");
 					arma.setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
 					PosicionarNavios frame = (PosicionarNavios) c;
 					frame.getMapa ().marcaMapa (jog.getMeuTabuleiro ());
@@ -103,11 +98,9 @@ public class TratadorMousePosicao implements MouseListener
 		}
 		else if (SwingUtilities.isRightMouseButton (e))
 		{
-			System.out.println ("Clique com botao direito");
 			Arma arma = jog.getArmaEmEstado (EstadoPosicionamento.Girando);
 			if (arma != null)
 			{
-				System.out.println ("Existe arma girando");
 				if (jog.posicionarArmaNoTabuleiro (arma.getPrimeiroPontoNoMapa ().x, arma.getPrimeiroPontoNoMapa ().y, arma, true))
 				{
 					PosicionarNavios frame;

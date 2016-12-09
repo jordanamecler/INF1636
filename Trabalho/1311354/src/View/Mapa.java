@@ -118,7 +118,6 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 	
 	public void pintaRetanguloNaPosicao (Point p, Color c)
 	{	
-		System.out.println ("Posicao no mapa: (" + p.x + "," + p.y + ")");
 		retangulos[p.x][p.y] = 1;
 		repaint ();
 	}
@@ -155,7 +154,6 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 		while (li.hasNext ())
 		{
 			ObservadorIF ob = (ObservadorIF) li.next ();
-			System.out.println ("Notificando observers!");
 			ob.update (mensagem, obj);
 			// nao remove observer nesse caso
 		}	
@@ -168,14 +166,6 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 		{
 			case "marcar_mapa":
 				int[][] mapa = (int [][]) obj;
-				System.out.println ("pintando mapa");
-				for (int[] i: mapa)
-				{
-					for (int j: i)
-						System.out.print (j);
-					System.out.println ("");
-				}
-				
 				marcaMapa (mapa);
 				break;
 		}

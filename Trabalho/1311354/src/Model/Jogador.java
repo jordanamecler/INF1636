@@ -293,7 +293,6 @@ public class Jogador implements ObservadoIF
 		while (li.hasNext ())
 		{
 			ObservadorIF ob = (ObservadorIF) li.next ();
-			System.out.println ("Notificando observers!");
 			ob.update (mensagem, true);
 			li.remove ();
 		}
