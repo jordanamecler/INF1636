@@ -9,6 +9,7 @@ import java.util.Vector;
 import View.ViewFacade;
 import Model.InformacoesGlobais;
 import Model.Jogador;
+import Model.JogoDAO;
 import Others.ObservadoIF;
 import Others.ObservadorIF;
 
@@ -45,6 +46,10 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				inf.setJogadorCorrente (inf.getJogador (1));
 				ViewFacade.inicializaJogo (this, inf.getJogador (1).getNome (), inf.getJogador (1).getMeuTabuleiro (), inf.getJogador (1).getTabuleiroInimigo ());
 				jogoComecou = true;
+				JogoDAO dao = new JogoDAO();
+				boolean salvou = dao.salvarJogo(inf.getJogador(1), inf.getJogador(2));
+				System.out.println("Salvou jogo: " + salvou);
+				
 				break;
 			case "mapa_clicado":
 				if (jogoComecou) 

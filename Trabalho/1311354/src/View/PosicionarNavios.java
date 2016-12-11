@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoIF
+public class PosicionarNavios extends MenuFrame implements ObservadorIF, ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
@@ -30,6 +30,8 @@ public class PosicionarNavios extends JFrame implements ObservadorIF, ObservadoI
 	
 	public PosicionarNavios (int numJogador, String nomeJogador)
 	{
+		super(true, true);
+		
 		setTitle ("Batalha Naval");
 		Container c = getContentPane ();
 		

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
-public class EscolherJogadores extends JFrame implements ObservadoIF
+public class EscolherJogadores extends MenuFrame implements ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 410;
@@ -23,6 +23,8 @@ public class EscolherJogadores extends JFrame implements ObservadoIF
 	
 	public EscolherJogadores ()
 	{
+		super(false, true);
+		
 		setLayout (null);
 		JLabel jogador1 = new JLabel ("Jogador 1");
 		JLabel jogador2 = new JLabel ("Jogador 2");

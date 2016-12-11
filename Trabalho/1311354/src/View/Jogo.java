@@ -19,7 +19,7 @@ import Others.ObservadoIF;
 import Others.ObservadorIF;
 import Others.TratadorMouseJogo;
 
-public class Jogo extends JFrame implements ObservadorIF, ObservadoIF
+public class Jogo extends MenuFrame implements ObservadorIF, ObservadoIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 900;
@@ -32,6 +32,8 @@ public class Jogo extends JFrame implements ObservadorIF, ObservadoIF
 
 	public Jogo (ObservadorIF observador, String nome, int[][] tab, int[][] tabInimigo)
 	{
+		super(true, false);
+		
 		setTitle ("Batalha Naval");
 		
 		Container c = getContentPane ();

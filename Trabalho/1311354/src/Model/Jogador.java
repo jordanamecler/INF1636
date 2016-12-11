@@ -29,11 +29,21 @@ public class Jogador implements ObservadoIF
 		this.nome = nome;
 	}
 
+	public void setTabuleiroInimigo (int[][] mapa)
+	{
+		tabuleiroInimigo = mapa;
+	}
+	
 	public int[][] getTabuleiroInimigo ()
 	{
 		return tabuleiroInimigo;
 	}
 
+	public void setMeuTabuleiro (int[][] mapa)
+	{
+		meuTabuleiro = mapa;
+	}
+	
 	public int[][] getMeuTabuleiro ()
 	{
 		return meuTabuleiro;
