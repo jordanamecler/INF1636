@@ -23,7 +23,7 @@ public class EscolherJogadores extends MenuFrame implements ObservadoIF, Observa
 	
 	public EscolherJogadores ()
 	{
-		super(false, true);
+		super (false, true);
 		
 		setLayout (null);
 		JLabel jogador1 = new JLabel ("Jogador 1");
@@ -104,6 +104,6 @@ public class EscolherJogadores extends MenuFrame implements ObservadoIF, Observa
 	public void update (String caso, Object obj)
 	{
 		if (caso == "jogo_carregado")
-			this.dispose();
+			dispose ();
 	}
 }

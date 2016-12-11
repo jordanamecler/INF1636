@@ -32,6 +32,8 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 	{
 		super(true, true);
 		
+		setLayout (null);
+		
 		setTitle ("Batalha Naval");
 		Container c = getContentPane ();
 		
@@ -42,10 +44,13 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 		Jogador jog = inf.getJogador (numJogador);
 		
 		JLabel label = new JLabel ();
+		label.setLayout (null);
 		label.setText (nomeJogador);
 		
 		// Mapa para escolher as posicoes das armas
 		mapa = new Mapa ();
+		mapa.setLayout (null);
+		mapa.setBounds (500, 125, 300, 300);
 		
 		for (int i = 0; i < 15; i++)
 		{
@@ -70,6 +75,7 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 		jog.getListaArmas ().add (couracado);
 		
 		ArmaView cv = new ArmaView (couracado);
+		cv.setLayout (null);
 		armasViews.add (cv);
 		cv.setBounds (50, 100, 15 * 5, 15 * 2);
 		cv.setName ("cv");
@@ -82,6 +88,7 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 			Arma submarino = new Arma (TipoDeArma.Submarino);
 			jog.getListaArmas ().add (submarino);
 			ArmaView sv = new ArmaView (submarino);
+			sv.setLayout (null);
 			armasViews.add (sv);
 			sv.setBounds (50 + i * 25  ,180 , 15 , 15 * 2);
 			c.add (sv);
@@ -95,6 +102,7 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 			Arma cruzador = new Arma (TipoDeArma.Cruzador);
 			jog.getListaArmas ().add (cruzador);
 			ArmaView crv = new ArmaView (cruzador);
+			crv.setLayout (null);
 			armasViews.add (crv);
 			crv.setBounds (50 + i * 25 * 4,260, 15 * 4, 15 * 2);
 			c.add (crv);
@@ -108,6 +116,7 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 			Arma hidro = new Arma (TipoDeArma.Hidroaviao);
 			jog.getListaArmas ().add (hidro);
 			ArmaView hv = new ArmaView (hidro);
+			hv.setLayout (null);
 			armasViews.add (hv);
 			hv.setBounds (50 + i * 25 * 3,340, 15 * 3, 15 * 2);
 			c.add (hv);
@@ -121,6 +130,7 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 			Arma des = new Arma (TipoDeArma.Destroyer);
 			jog.getListaArmas ().add (des);
 			ArmaView dv = new ArmaView (des);
+			dv.setLayout (null);
 			armasViews.add (dv);
 			dv.setBounds (50 + i * 25 * 2,420, 15 * 2, 15 * 2);
 			c.add (dv);
@@ -132,6 +142,7 @@ public class PosicionarNavios extends MenuFrame implements ObservadorIF, Observa
 		mapa.addMouseListener (new TratadorMousePosicao (mapa));
 		
 		terminei = new JButton ("Terminei");
+		terminei.setLayout (null);
 		terminei.setEnabled (false);
 		terminei.addActionListener (new ActionListener () {
 			public void actionPerformed (ActionEvent e) {

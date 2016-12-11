@@ -10,60 +10,63 @@ import java.util.ListIterator;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 
-import Model.JogoDAO;
-
-public class TratadorMenuBar implements ActionListener, ObservadoIF {
-
-	private JFileChooser fc = new JFileChooser();
+public class TratadorMenuBar implements ActionListener, ObservadoIF
+{
+	private JFileChooser fc = new JFileChooser ();
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		System.out.println("action performed");
-		JMenuItem item = (JMenuItem) e.getSource();
+	public void actionPerformed (ActionEvent e)
+	{
+		System.out.println ("action performed");
+		JMenuItem item = (JMenuItem) e.getSource ();
 		
-		if (item.getName() == "salvar") {
-			
-			int ret = fc.showSaveDialog(null);
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				System.out.println("salvou em " + file.getName());
-				this.notifyObservers("jogo_salvo", file);
+		if (item.getName () == "salvar")
+		{	
+			int ret = fc.showSaveDialog (null);
+			if (ret == JFileChooser.APPROVE_OPTION)
+			{
+				File file = fc.getSelectedFile ();
+				System.out.println ("salvou em " + file.getName ());
+				this.notifyObservers ("jogo_salvo", file);
 			}
 		}
-		else {
-			int ret = fc.showOpenDialog(null);
-			if (ret == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				this.notifyObservers("jogo_carregado", file);
+		else
+		{
+			int ret = fc.showOpenDialog (null);
+			if (ret == JFileChooser.APPROVE_OPTION)
+			{
+				File file = fc.getSelectedFile ();
+				this.notifyObservers ("jogo_carregado", file);
 			}
 		}
 	}
 
 	@Override
-	public void registerObserver(ObservadorIF observer) {
+	public void registerObserver (ObservadorIF observer)
+	{
 		observers.add (observer);
 		
 	}
 
 	@Override
-	public void removeObserver(ObservadorIF observer) {
+	public void removeObserver(ObservadorIF observer)
+	{
 		observers.remove (observer);
 	}
 
 	@Override
-	public void notifyObservers(String mensagem, Object obj) {
+	public void notifyObservers (String mensagem, Object obj)
+	{
 		ListIterator <ObservadorIF> li = observers.listIterator ();
-		System.out.println("notificando salvar");
+		System.out.println ("notificando salvar");
 		while (li.hasNext ())
 		{
-			System.out.println("notificando salvar1");
+			System.out.println ("notificando salvar1");
 			ObservadorIF ob = (ObservadorIF) li.next ();
 			ob.update (mensagem, obj);
 			li.remove ();
 		}
-		
 	}
 
 }

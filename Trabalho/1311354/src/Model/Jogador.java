@@ -66,7 +66,7 @@ public class Jogador implements ObservadoIF
 	{
 		if (meuTabuleiro[x][y] == 0)
 			meuTabuleiro[x][y] = 7;
-		else if (meuTabuleiro[x][y] != 7)// && meuTabuleiro[x][y] == 6)
+		else if (meuTabuleiro[x][y] != 7)
 			meuTabuleiro[x][y] = 6;
 	}
 	

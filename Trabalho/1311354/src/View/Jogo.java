@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -32,7 +31,7 @@ public class Jogo extends MenuFrame implements ObservadorIF, ObservadoIF
 
 	public Jogo (ObservadorIF observador, String nome, int[][] tab, int[][] tabInimigo)
 	{
-		super(true, false);
+		super (true, false);
 		
 		setTitle ("Batalha Naval");
 		
@@ -51,16 +50,16 @@ public class Jogo extends MenuFrame implements ObservadorIF, ObservadoIF
 		nomeJogadorLabel.setHorizontalAlignment (JLabel.CENTER);
 		c.add (nomeJogadorLabel);
 		
-		Mapa mapa1 = new Mapa (100, 125);
+		Mapa mapa1 = new Mapa ();
 		mapa1.setName ("mapa_inimigo");
 		mapa1.setLayout (null);
 		mapa1.addMouseListener (new TratadorMouseJogo (mapa1));
 		
-		Mapa mapa2 = new Mapa (500, 125);
+		Mapa mapa2 = new Mapa ();
 		mapa2.setLayout (null);
 		
-		mapa1.setSize (300, 300);
-		mapa2.setSize (300, 300);
+		mapa1.setBounds (100, 125, 300, 300);
+		mapa2.setBounds (500, 125, 300, 300);
 		
 		mapa1.setBloqueado (true);
 		mapa2.setBloqueado (true);

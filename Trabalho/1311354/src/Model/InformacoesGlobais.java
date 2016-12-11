@@ -6,7 +6,6 @@ public class InformacoesGlobais
 	private Jogador jogador1 = new Jogador ();
 	private Jogador jogador2 = new Jogador ();
 	private Jogador jogadorCorrente;
-	private Jogador vencedor;
 	private boolean existeVencedor = false;
 	
 	private InformacoesGlobais ()
@@ -19,10 +18,10 @@ public class InformacoesGlobais
 		this.jogador2 = jog2;
 	}
 
-	public Jogador getJogadorNaoCorrente() {
-		if (jogadorCorrente == jogador1) {
+	public Jogador getJogadorNaoCorrente ()
+	{
+		if (jogadorCorrente == jogador1)
 			return jogador2;
-		}
 		return jogador1;
 	}
 	public static InformacoesGlobais getInformacoesGlobais ()

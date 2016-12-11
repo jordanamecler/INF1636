@@ -16,8 +16,6 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int TXT_X = 300;
 	private final int TXT_Y = 300;
-	private int distanciaX = 500;
-	private int distanciaY = 125;
 	private int[][] retangulos = new int[15][15];
 	private boolean bloqueado = false;
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
@@ -27,19 +25,10 @@ public class Mapa extends JPanel implements ObservadoIF, ObservadorIF
 		
 	}
 	
-	public Mapa (int x, int y)
-	{
-		distanciaX = x;
-		distanciaY = y;
-	}
-	
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent (g);
 		Graphics2D g2d = (Graphics2D) g;
-		
-		setBounds (distanciaX, distanciaY, TXT_X, TXT_Y);
-		setBackground (Color.white);
 		
 		// Desenha retângulo
 		double leftX = 0;

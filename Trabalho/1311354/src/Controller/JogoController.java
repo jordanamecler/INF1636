@@ -28,7 +28,7 @@ public class JogoController implements ObservadorIF, ObservadoIF
 	public void update (String caso, Object obj) 
 	{
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
-		JogoDAO dao = new JogoDAO();
+		JogoDAO dao = new JogoDAO ();
 		Jogador jog;
 		
 		switch (caso)
@@ -53,23 +53,26 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				break;
 			
 			case "jogo_salvo":
-				boolean salvou = dao.salvarJogo((File) obj);
-				System.out.println("salvou? " + salvou);
+				boolean salvou = dao.salvarJogo ((File) obj);
+				System.out.println ("salvou? " + salvou);
 				break;
 				
 			case "jogo_carregado":
-				boolean carregou = dao.carregarJogo((File) obj);
-				System.out.println("carregou " + carregou);
-				if (carregou) {
-					try {
-						Jogador[] jogadores = dao.getJogaresCarregados();
-						inf.setJogadores(jogadores[0], jogadores[1]);
+				boolean carregou = dao.carregarJogo ((File) obj);
+				System.out.println ("carregou " + carregou);
+				if (carregou)
+				{
+					try
+					{
+						Jogador[] jogadores = dao.getJogaresCarregados ();
+						inf.setJogadores (jogadores[0], jogadores[1]);
 						inf.setJogadorCorrente (inf.getJogador (1));
 						ViewFacade.inicializaJogo (this, inf.getJogador (1).getNome (), inf.getJogador (1).getMeuTabuleiro (), inf.getJogador (1).getTabuleiroInimigo ());
 						jogoComecou = true;		
 					}
-					catch (IndexOutOfBoundsException e) {
-						System.out.println("Arquio fora do padrão.");
+					catch (IndexOutOfBoundsException e)
+					{
+						System.out.println ("Arquio fora do padrão.");
 					}
 				}
 				break;

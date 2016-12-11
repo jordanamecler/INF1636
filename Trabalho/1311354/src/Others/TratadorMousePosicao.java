@@ -43,7 +43,8 @@ public class TratadorMousePosicao implements MouseListener
 					a.clicouNaArma (e.getX (), e.getY ())) {
 					a.getArma ().setEstadoPosicionamento (EstadoPosicionamento.EmTransicao);
 				}
-				else if (a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.EmTransicao) {
+				else if (a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.EmTransicao)
+				{
 						 a.getArma ().setEstadoPosicionamento (EstadoPosicionamento.Disponivel);
 				}
 				else if (a.getArma ().getEstadoPosicionamento () == EstadoPosicionamento.Girando)
