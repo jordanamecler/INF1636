@@ -13,7 +13,18 @@ public class InformacoesGlobais
 	{
 		
 	}
+	
+	public void setJogadores(Jogador jog1, Jogador jog2) {
+		this.jogador1 = jog1;
+		this.jogador2 = jog2;
+	}
 
+	public Jogador getJogadorNaoCorrente() {
+		if (jogadorCorrente == jogador1) {
+			return jogador2;
+		}
+		return jogador1;
+	}
 	public static InformacoesGlobais getInformacoesGlobais ()
 	{
 		if (informacoesGlobais == null)

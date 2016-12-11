@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
 
-public class EscolherJogadores extends MenuFrame implements ObservadoIF
+public class EscolherJogadores extends MenuFrame implements ObservadoIF, ObservadorIF
 {
 	private static final long serialVersionUID = 7526472295622776147L;  // unique id
 	private final int LARG_DEFAULT = 410;
@@ -99,5 +99,11 @@ public class EscolherJogadores extends MenuFrame implements ObservadoIF
 			ob.update (mensagem, vector);
 			li.remove ();
 		}
+	}
+	
+	public void update (String caso, Object obj)
+	{
+		if (caso == "jogo_carregado")
+			this.dispose();
 	}
 }

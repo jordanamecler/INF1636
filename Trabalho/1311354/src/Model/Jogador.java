@@ -257,6 +257,11 @@ public class Jogador implements ObservadoIF
 		numTiros = 3;
 	}
 	
+	public void setTiros (int num)
+	{
+		numTiros = num;
+	}
+	
 	public int getNumTiros ()
 	{
 		return numTiros;

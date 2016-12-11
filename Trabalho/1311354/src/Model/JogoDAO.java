@@ -21,8 +21,8 @@ public class JogoDAO {
 		InformacoesGlobais info = InformacoesGlobais.getInformacoesGlobais();
 		
 		String infoJogo = new String();
-		infoJogo += jogadorToString(info.getJogador(1));
-		infoJogo += jogadorToString(info.getJogador(2));
+		infoJogo += jogadorToString(info.getJogadorCorrente());
+		infoJogo += jogadorToString(info.getJogadorNaoCorrente());
 		
 		try {
 			writeFile(infoJogo, file);
@@ -32,10 +32,10 @@ public class JogoDAO {
 		return true;
 	}
 	
-	public boolean carregarJogo() {
+	public boolean carregarJogo(File file) {
 		
 		try {
-			data = readFile(null);
+			data = readFile(file);
 		}
 		catch (IOException e) {
 			return false;
@@ -53,13 +53,13 @@ public class JogoDAO {
 			
 			// Info jogador 1
 			jog1.setNome(li.next());
-			
+			jog1.setTiros(Character.getNumericValue(li.next().charAt(0)));
 			int[][] mapaJog = new int[15][15];
 			int[][] mapaInimigo = new int[15][15];
 			
 			for (int i=0; i<15; i++) {
 				String linha = li.next();
-				for (int j = 0; i < 15; j++) {
+				for (int j = 0; j < 15; j++) {
 					mapaJog[i][j] = Character.getNumericValue(linha.charAt(j));
 				}
 			}
@@ -67,7 +67,7 @@ public class JogoDAO {
 			
 			for (int i=0; i<15; i++) {
 				String linha = li.next();
-				for (int j = 0; i < 15; j++) {
+				for (int j = 0; j < 15; j++) {
 					mapaInimigo[i][j] = Character.getNumericValue(linha.charAt(j));
 				}
 			}
@@ -75,13 +75,14 @@ public class JogoDAO {
 			
 			// Info jogador 2
 			jog2.setNome(li.next());
+			jog2.setTiros(Character.getNumericValue(li.next().charAt(0)));
 			
 			int[][] mapaJog2 = new int[15][15];
 			int[][] mapaInimigo2 = new int[15][15];
 			
 			for (int i=0; i<15; i++) {
 				String linha = li.next();
-				for (int j = 0; i < 15; j++) {
+				for (int j = 0; j < 15; j++) {
 					mapaJog2[i][j] = Character.getNumericValue(linha.charAt(j));
 				}
 			}
@@ -89,7 +90,7 @@ public class JogoDAO {
 			
 			for (int i=0; i<15; i++) {
 				String linha = li.next();
-				for (int j = 0; i < 15; j++) {
+				for (int j = 0; j < 15; j++) {
 					mapaInimigo2[i][j] = Character.getNumericValue(linha.charAt(j));
 				}
 			}

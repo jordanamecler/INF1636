@@ -11,12 +11,13 @@ public class MenuJogo extends JMenuBar {
 	private JMenu menu;
 	private JMenuItem salvarItem;
 	private JMenuItem carregarItem;
+	protected TratadorMenuBar tratador;
 	
 	public MenuJogo() {
 		
 		menu = new JMenu("Arquivo");
 		
-		TratadorMenuBar tratador = new TratadorMenuBar();
+		tratador = new TratadorMenuBar();
 		
 		salvarItem = new JMenuItem("Salvar como...");
 		salvarItem.addActionListener(tratador);

@@ -17,6 +17,10 @@ public class MenuFrame extends JFrame implements ObservadorIF {
 		this.setJMenuBar(menubar);
 		
 	}
+	
+	public void registraObserverMenu(ObservadorIF obs) {
+		this.menubar.tratador.registerObserver(obs);
+	}
 
 	@Override
 	public void update(String caso, Object obj) {

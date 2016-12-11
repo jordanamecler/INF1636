@@ -1,6 +1,7 @@
 package Controller;
 
 import java.awt.Point;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -9,6 +10,7 @@ import java.util.Vector;
 import View.ViewFacade;
 import Model.InformacoesGlobais;
 import Model.Jogador;
+import Model.JogoDAO;
 import Others.ObservadoIF;
 import Others.ObservadorIF;
 
@@ -47,6 +49,24 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				inf.setJogadorCorrente (inf.getJogador (1));
 				ViewFacade.inicializaJogo (this, inf.getJogador (1).getNome (), inf.getJogador (1).getMeuTabuleiro (), inf.getJogador (1).getTabuleiroInimigo ());
 				jogoComecou = true;		
+				break;
+			
+			case "jogo_carregado":
+				JogoDAO dao = new JogoDAO();
+				boolean carregou = dao.carregarJogo((File) obj);
+				System.out.println("carregou " + carregou);
+				if (carregou) {
+					try {
+						Jogador[] jogadores = dao.getJogaresCarregados();
+						inf.setJogadores(jogadores[0], jogadores[1]);
+						inf.setJogadorCorrente (inf.getJogador (1));
+						ViewFacade.inicializaJogo (this, inf.getJogador (1).getNome (), inf.getJogador (1).getMeuTabuleiro (), inf.getJogador (1).getTabuleiroInimigo ());
+						jogoComecou = true;		
+					}
+					catch (IndexOutOfBoundsException e) {
+						System.out.println("Arquio fora do padrão.");
+					}
+				}
 				break;
 				
 			case "mapa_clicado":
