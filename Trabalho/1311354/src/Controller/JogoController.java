@@ -28,6 +28,7 @@ public class JogoController implements ObservadorIF, ObservadoIF
 	public void update (String caso, Object obj) 
 	{
 		InformacoesGlobais inf = InformacoesGlobais.getInformacoesGlobais ();
+		JogoDAO dao = new JogoDAO();
 		Jogador jog;
 		
 		switch (caso)
@@ -51,8 +52,12 @@ public class JogoController implements ObservadorIF, ObservadoIF
 				jogoComecou = true;		
 				break;
 			
+			case "jogo_salvo":
+				boolean salvou = dao.salvarJogo((File) obj);
+				System.out.println("salvou? " + salvou);
+				break;
+				
 			case "jogo_carregado":
-				JogoDAO dao = new JogoDAO();
 				boolean carregou = dao.carregarJogo((File) obj);
 				System.out.println("carregou " + carregou);
 				if (carregou) {

@@ -19,6 +19,8 @@ public class ViewFacade
 	
 	public static void inicializaJogo (ObservadorIF observador, String nome, int[][] meuTab, int[][] tabInimigo)
 	{
-		new Jogo (observador, nome, meuTab, tabInimigo).registerObserver (observador);
+		Jogo frame = new Jogo (observador, nome, meuTab, tabInimigo);
+		frame.registerObserver (observador);
+		frame.registraObserverMenu(observador);
 	}
 }

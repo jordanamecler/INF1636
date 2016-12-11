@@ -20,6 +20,7 @@ public class MenuFrame extends JFrame implements ObservadorIF {
 	
 	public void registraObserverMenu(ObservadorIF obs) {
 		this.menubar.tratador.registerObserver(obs);
+		System.out.println("registrou saver");
 	}
 
 	@Override

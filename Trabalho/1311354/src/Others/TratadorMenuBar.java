@@ -2,8 +2,6 @@ package Others;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +12,10 @@ import javax.swing.JMenuItem;
 
 import Model.JogoDAO;
 
-public class TratadorMenuBar implements ActionListener, ItemListener, ObservadoIF {
+public class TratadorMenuBar implements ActionListener, ObservadoIF {
 
 	private JFileChooser fc = new JFileChooser();
 	private List <ObservadorIF> observers = new ArrayList <ObservadorIF> ();
-	
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-
-		System.out.println("item state changed");
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -37,10 +29,7 @@ public class TratadorMenuBar implements ActionListener, ItemListener, ObservadoI
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				System.out.println("salvou em " + file.getName());
-				
-				JogoDAO dao = new JogoDAO();
-				boolean salvou = dao.salvarJogo(file);
-				System.out.println("salvou? " + salvou);
+				this.notifyObservers("jogo_salvo", file);
 			}
 		}
 		else {
@@ -66,9 +55,10 @@ public class TratadorMenuBar implements ActionListener, ItemListener, ObservadoI
 	@Override
 	public void notifyObservers(String mensagem, Object obj) {
 		ListIterator <ObservadorIF> li = observers.listIterator ();
-		
+		System.out.println("notificando salvar");
 		while (li.hasNext ())
 		{
+			System.out.println("notificando salvar1");
 			ObservadorIF ob = (ObservadorIF) li.next ();
 			ob.update (mensagem, obj);
 			li.remove ();
