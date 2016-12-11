@@ -17,14 +17,15 @@ public class JogoDAO {
 	
 	List <String> data = null;
 	
-	public boolean salvarJogo(Jogador jog1, Jogador jog2) {
+	public boolean salvarJogo(File file) {
+		InformacoesGlobais info = InformacoesGlobais.getInformacoesGlobais();
 		
 		String infoJogo = new String();
-		infoJogo += jogadorToString(jog1);
-		infoJogo += jogadorToString(jog2);
+		infoJogo += jogadorToString(info.getJogador(1));
+		infoJogo += jogadorToString(info.getJogador(2));
 		
 		try {
-			writeFile(infoJogo, null);
+			writeFile(infoJogo, file);
 		} catch (IOException e) {
 			return false;
 		}

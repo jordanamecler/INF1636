@@ -9,6 +9,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 
+import Model.JogoDAO;
+
 public class TratadorMenuBar implements ActionListener, ItemListener {
 
 	private JFileChooser fc = new JFileChooser();
@@ -30,15 +32,20 @@ public class TratadorMenuBar implements ActionListener, ItemListener {
 			int ret = fc.showSaveDialog(null);
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				// notifica jogoDAO;
 				System.out.println("salvou em " + file.getName());
+				
+				JogoDAO dao = new JogoDAO();
+				boolean salvou = dao.salvarJogo(file);
+				System.out.println("salvou? " + salvou);
 			}
 		}
 		else {
 			int ret = fc.showOpenDialog(null);
 			if (ret == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				// notifica jogoDAO;
+
+				JogoDAO dao = new JogoDAO();
+				boolean carregou = dao.carregarJogo();
 				System.out.println("carregou " + file.getName());
 			}
 		}
